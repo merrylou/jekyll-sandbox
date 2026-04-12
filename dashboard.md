@@ -4,32 +4,33 @@ title: ダッシュボード
 nav_order: 2
 ---
 
-# コンテンツダッシュボード
+<h1>コンテンツダッシュボード</h1>
 
-AI駆動開発プレイブックのコンテンツ構造を可視化します。
+<p>AI駆動開発プレイブックのコンテンツ構造を可視化します。</p>
 
----
+<hr />
 
-## カテゴリ別ページ数
+<h2 id="カテゴリ別ページ数">カテゴリ別ページ数</h2>
 
-<div style="max-width: 480px; margin: 0 auto;">
-<canvas id="categoryChart"></canvas>
+<div style="max-width: 500px; margin: 0 auto; padding: 20px;">
+  <canvas id="categoryChart" width="500" height="400"></canvas>
 </div>
 
----
+<hr />
 
-## コンテンツマップ
+<h2 id="コンテンツマップ">コンテンツマップ</h2>
 
-```mermaid
-graph TD
-    ROOT["🏠 AI駆動開発プレイブック"]
+<div style="width: 100%; overflow-x: auto; border: 1px solid #e0e0e0; border-radius: 8px; padding: 16px; background: #fafafa;">
+  <div style="min-width: 900px;">
+    <pre class="language-mermaid">graph TD
+    ROOT["AI駆動開発プレイブック"]
 
-    ROOT --> COMMON["📘 共通ガイド<br/>4ページ"]
-    ROOT --> IMPL["⚙️ 実装工程<br/>9ページ"]
-    ROOT --> UT["🧪 単体テスト工程<br/>6ページ"]
-    ROOT --> RESEARCH["🔬 リサーチ<br/>3ページ"]
-    ROOT --> REVIEWS["📝 レビュー記録<br/>9ページ"]
-    ROOT --> REF["📂 参考資料"]
+    ROOT --> COMMON["共通ガイド 4p"]
+    ROOT --> IMPL["実装工程 9p"]
+    ROOT --> UT["単体テスト工程 6p"]
+    ROOT --> RESEARCH["リサーチ 3p"]
+    ROOT --> REVIEWS["レビュー記録 9p"]
+    ROOT --> REF["参考資料"]
 
     COMMON --> QS["クイックスタート"]
     COMMON --> MODES["Copilotモード解説"]
@@ -57,7 +58,7 @@ graph TD
 
     REF --> AGENTS["エージェント 2件"]
     REF --> SKILLS["スキル 18件"]
-    REF --> CLAUDE["Claude Code<br/>コマンド 5件"]
+    REF --> CLAUDE["Claude Code コマンド 5件"]
 
     SKILLS --> CD["実装系 11件"]
     SKILLS --> UTS["テスト系 5件"]
@@ -69,18 +70,19 @@ graph TD
     style UT fill:#fbbc04,color:#333,stroke:none
     style RESEARCH fill:#9334e6,color:#fff,stroke:none
     style REVIEWS fill:#e67c73,color:#fff,stroke:none
-    style REF fill:#607d8b,color:#fff,stroke:none
-```
-
----
-
-## スキル一覧と分類
-
-<div style="max-width: 600px; margin: 0 auto;">
-<canvas id="skillChart"></canvas>
+    style REF fill:#607d8b,color:#fff,stroke:none</pre>
+  </div>
 </div>
 
-### スキル詳細
+<hr />
+
+<h2 id="スキル一覧と分類">スキル一覧と分類</h2>
+
+<div style="max-width: 700px; margin: 0 auto; padding: 20px;">
+  <canvas id="skillChart" width="700" height="350"></canvas>
+</div>
+
+<h3>スキル詳細</h3>
 
 <table>
   <thead>
@@ -103,9 +105,9 @@ graph TD
   </tbody>
 </table>
 
----
+<hr />
 
-## レビュー履歴
+<h2 id="レビュー履歴">レビュー履歴</h2>
 
 <style>
 .timeline {
@@ -194,74 +196,85 @@ graph TD
   </div>
 </div>
 
----
+<hr />
 
-## サマリー
+<h2 id="サマリー">サマリー</h2>
 
-| 指標 | 値 |
-|------|-----|
-| 総ページ数 | 57 |
-| ドキュメントページ | 32 |
-| 参考資料ページ | 25 |
-| ユースケース数 | 13（実装8 + テスト5） |
-| スキル数 | 18（セットアップ2 + 実装11 + テスト5） |
-| エージェント数 | 2（@implementer, @tester） |
-| レビューセッション | 2回 |
+<table>
+  <thead><tr><th>指標</th><th>値</th></tr></thead>
+  <tbody>
+    <tr><td>総ページ数</td><td>57</td></tr>
+    <tr><td>ドキュメントページ</td><td>32</td></tr>
+    <tr><td>参考資料ページ</td><td>25</td></tr>
+    <tr><td>ユースケース数</td><td>13（実装8 + テスト5）</td></tr>
+    <tr><td>スキル数</td><td>18（セットアップ2 + 実装11 + テスト5）</td></tr>
+    <tr><td>エージェント数</td><td>2（@implementer, @tester）</td></tr>
+    <tr><td>レビューセッション</td><td>2回</td></tr>
+  </tbody>
+</table>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', function() {
   // Category donut chart
-  new Chart(document.getElementById('categoryChart'), {
-    type: 'doughnut',
-    data: {
-      labels: ['共通ガイド', '実装工程', '単体テスト工程', 'リサーチ', 'レビュー記録', '要件・背景', '参考資料（GitHub）', '参考資料（Claude）'],
-      datasets: [{
-        data: [4, 9, 6, 3, 9, 1, 21, 5],
-        backgroundColor: [
-          '#34a853', '#ea4335', '#fbbc04', '#9334e6',
-          '#e67c73', '#78909c', '#4285f4', '#ff6d01'
-        ],
-        borderWidth: 2,
-        borderColor: '#fff'
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'bottom', labels: { font: { size: 12 } } },
-        title: { display: true, text: 'カテゴリ別ページ構成', font: { size: 16 } }
+  var ctx1 = document.getElementById('categoryChart');
+  if (ctx1) {
+    new Chart(ctx1.getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        labels: ['共通ガイド', '実装工程', '単体テスト工程', 'リサーチ', 'レビュー記録', '要件・背景', '参考資料（GitHub）', '参考資料（Claude）'],
+        datasets: [{
+          data: [4, 9, 6, 3, 9, 1, 21, 5],
+          backgroundColor: [
+            '#34a853', '#ea4335', '#fbbc04', '#9334e6',
+            '#e67c73', '#78909c', '#4285f4', '#ff6d01'
+          ],
+          borderWidth: 2,
+          borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { size: 13 }, padding: 16 } },
+          title: { display: true, text: 'カテゴリ別ページ構成', font: { size: 18 } }
+        }
       }
-    }
-  });
+    });
+  }
 
   // Skill bar chart
-  new Chart(document.getElementById('skillChart'), {
-    type: 'bar',
-    data: {
-      labels: ['セットアップ', '実装 — 分析', '実装 — 変更', '実装 — 生成', '実装 — 確認', '単体テスト — 設計', '単体テスト — 生成', '単体テスト — 分析', '単体テスト — 変更'],
-      datasets: [{
-        label: 'スキル数',
-        data: [2, 6, 3, 1, 1, 1, 2, 1, 1],
-        backgroundColor: [
-          '#607d8b',
-          '#ef5350', '#ef5350', '#ef5350', '#ef5350',
-          '#fdd835', '#fdd835', '#fdd835', '#fdd835'
-        ],
-        borderRadius: 4
-      }]
-    },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        title: { display: true, text: 'スキル分類別の内訳', font: { size: 16 } }
+  var ctx2 = document.getElementById('skillChart');
+  if (ctx2) {
+    new Chart(ctx2.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['セットアップ', '実装 — 分析', '実装 — 変更', '実装 — 生成', '実装 — 確認', 'テスト — 設計', 'テスト — 生成', 'テスト — 分析', 'テスト — 変更'],
+        datasets: [{
+          label: 'スキル数',
+          data: [2, 6, 3, 1, 1, 1, 2, 1, 1],
+          backgroundColor: [
+            '#607d8b',
+            '#ef5350', '#ef5350', '#ef5350', '#ef5350',
+            '#fdd835', '#fdd835', '#fdd835', '#fdd835'
+          ],
+          borderRadius: 4
+        }]
       },
-      scales: {
-        x: { beginAtZero: true, ticks: { stepSize: 1 } }
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'スキル分類別の内訳', font: { size: 18 } }
+        },
+        scales: {
+          x: { beginAtZero: true, ticks: { stepSize: 1 } }
+        }
       }
-    }
-  });
+    });
+  }
 });
 </script>
