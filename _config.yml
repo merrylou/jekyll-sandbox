@@ -1,0 +1,86 @@
+title: AI駆動開発プレイブック
+description: SIer組織向け GitHub Copilot 活用ガイド — 実装工程・単体テスト工程のユースケース集
+url: "https://merrylou.github.io"
+baseurl: "/jekyll-sandbox"
+
+remote_theme: just-the-docs/just-the-docs@v0.10.1
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+# just-the-docs settings
+color_scheme: light
+search_enabled: true
+nav_sort: case_insensitive
+heading_anchors: true
+lang: ja
+
+# Mermaid
+mermaid:
+  version: "10.9.0"
+
+# Footer
+footer_content: "AI駆動開発プレイブック &mdash; Jekyll + GitHub Pages サンドボックス"
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: default
+  - scope:
+      path: "docs/common"
+    values:
+      layout: default
+      parent: "共通ガイド"
+      grand_parent: "ドキュメント"
+  - scope:
+      path: "docs/implementation"
+    values:
+      layout: default
+      parent: "実装工程"
+      grand_parent: "ドキュメント"
+  - scope:
+      path: "docs/unit-testing"
+    values:
+      layout: default
+      parent: "単体テスト工程"
+      grand_parent: "ドキュメント"
+  - scope:
+      path: "docs/research"
+    values:
+      layout: default
+      parent: "リサーチ"
+      grand_parent: "ドキュメント"
+  - scope:
+      path: "docs/reviews"
+    values:
+      layout: default
+      parent: "レビュー記録"
+      grand_parent: "ドキュメント"
+  - scope:
+      path: "reference/github"
+    values:
+      layout: default
+      parent: "GitHub Copilot 設定"
+      grand_parent: "参考資料"
+  - scope:
+      path: "reference/github/agents"
+    values:
+      layout: default
+      parent: "GitHub Copilot 設定"
+      grand_parent: "参考資料"
+  - scope:
+      path: "reference/github/skills"
+    values:
+      layout: default
+      parent: "GitHub Copilot 設定"
+      grand_parent: "参考資料"
+  - scope:
+      path: "reference/claude"
+    values:
+      layout: default
+      parent: "Claude Code コマンド"
+      grand_parent: "参考資料"

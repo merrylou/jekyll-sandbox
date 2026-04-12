@@ -1,0 +1,89 @@
+- name: setup-analyze
+  category: セットアップ
+  subcategory: 調査
+  description: "プロジェクトの技術スタック・アーキテクチャを自動調査"
+
+- name: setup-customize
+  category: セットアップ
+  subcategory: カスタマイズ
+  description: "調査結果に基づきCopilot設定を一括カスタマイズ"
+
+- name: cd-analyze-codebase
+  category: 実装
+  subcategory: 分析
+  description: "リポジトリ概要把握（新規参画時）"
+
+- name: cd-analyze-spec
+  category: 実装
+  subcategory: 分析
+  description: "設計書がないコードからの仕様復元"
+
+- name: cd-analyze-errorlog
+  category: 実装
+  subcategory: 分析
+  description: "エラーログ・スタックトレース解析"
+
+- name: cd-analyze-bug
+  category: 実装
+  subcategory: 分析
+  description: "不具合の発生箇所特定・影響トレース"
+
+- name: cd-analyze-impact
+  category: 実装
+  subcategory: 分析
+  description: "改修前の変更影響範囲・リスク評価"
+
+- name: cd-analyze-changepoint
+  category: 実装
+  subcategory: 分析
+  description: "変更要件からの修正箇所特定"
+
+- name: cd-change-plan
+  category: 実装
+  subcategory: 変更
+  description: "複数アプローチの比較・変更計画策定"
+
+- name: cd-create-scaffold
+  category: 実装
+  subcategory: 生成
+  description: "設計書からのコード骨格生成"
+
+- name: cd-change-existing
+  category: 実装
+  subcategory: 変更
+  description: "既存コードの改修"
+
+- name: cd-change-refactor
+  category: 実装
+  subcategory: 変更
+  description: "リファクタリング"
+
+- name: cd-check-review
+  category: 実装
+  subcategory: 確認
+  description: "レビュー前の品質セルフチェック"
+
+- name: ut-design-testspec
+  category: 単体テスト
+  subcategory: 設計
+  description: "UT観点一覧・テスト仕様書の作成"
+
+- name: ut-create-test
+  category: 単体テスト
+  subcategory: 生成
+  description: "テスト自動生成"
+
+- name: ut-create-testdata
+  category: 単体テスト
+  subcategory: 生成
+  description: "テストデータ生成"
+
+- name: ut-analyze-coverage
+  category: 単体テスト
+  subcategory: 分析
+  description: "カバレッジギャップ補完"
+
+- name: ut-change-test
+  category: 単体テスト
+  subcategory: 変更
+  description: "既存テストコードの改善"
