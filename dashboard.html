@@ -215,9 +215,15 @@ nav_order: 2
 </table>
 
 <!-- ========== Scripts ========== -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script>
-window.addEventListener('load', function() {
+(function() {
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js';
+  s.onload = function() { initCharts(); };
+  document.head.appendChild(s);
+})();
+
+function initCharts() {
   // Category donut chart
   var ctx1 = document.getElementById('categoryChart');
   if (ctx1) {
@@ -265,5 +271,5 @@ window.addEventListener('load', function() {
       }
     });
   }
-});
+}
 </script>
