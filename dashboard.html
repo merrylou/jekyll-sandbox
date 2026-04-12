@@ -6,126 +6,127 @@ nav_order: 2
 
 <style>
 /* ===== Donut ===== */
-.ds-donut-section { display: flex; align-items: center; gap: 48px; flex-wrap: wrap; padding: 24px 0; }
+.ds-donut-section { display: flex; align-items: center; gap: 48px; flex-wrap: wrap; padding: 20px 0; }
 .ds-donut {
-  width: 192px; height: 192px; border-radius: 50%; position: relative; flex-shrink: 0;
+  width: 180px; height: 180px; border-radius: 50%; position: relative; flex-shrink: 0;
   background: conic-gradient(
-    var(--green) 0deg 25.3deg,
-    var(--red) 25.3deg 82.1deg,
-    var(--orange) 82.1deg 120deg,
-    var(--blue) 120deg 139.0deg,
-    var(--gray-400) 139deg 196deg,
-    var(--gray-200) 196deg 202.3deg,
-    var(--gray-900) 202.3deg 334.7deg,
-    var(--purple) 334.7deg 360deg
+    var(--success) 0deg 25.3deg,
+    var(--error) 25.3deg 82.1deg,
+    var(--warning) 82.1deg 120deg,
+    var(--secondary) 120deg 139.0deg,
+    var(--text-secondary) 139deg 196deg,
+    var(--border) 196deg 202.3deg,
+    var(--text-primary) 202.3deg 334.7deg,
+    #924ff7 334.7deg 360deg
   );
 }
 .ds-donut-hole {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-  width: 108px; height: 108px; background: var(--gray-0); border-radius: 50%;
+  width: 100px; height: 100px; background: var(--bg); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.75rem; font-weight: 700; color: var(--gray-1000);
+  font-size: 24px; font-weight: 700; color: var(--text-primary);
 }
-.ds-legend { display: flex; flex-direction: column; gap: 6px; }
-.ds-legend-row { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; }
-.ds-legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
-.ds-legend-n { font-weight: 600; min-width: 18px; text-align: right; color: var(--gray-1000); }
-.ds-legend-t { color: var(--gray-500); }
+.ds-legend { display: flex; flex-direction: column; gap: 4px; }
+.ds-legend-row { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.ds-legend-dot { width: 10px; height: 10px; border-radius: var(--radius-xs); flex-shrink: 0; }
+.ds-legend-n { font-weight: 600; min-width: 18px; text-align: right; color: var(--text-primary); }
+.ds-legend-t { color: var(--text-secondary); }
 
 /* ===== Content Map ===== */
-.ds-map { display: flex; flex-direction: column; gap: 12px; }
+.ds-map { display: flex; flex-direction: column; gap: 8px; }
 .ds-map-root {
-  background: var(--gray-900); color: var(--gray-0);
-  padding: 10px 20px; border-radius: var(--radius-lg);
-  font-size: 0.875rem; font-weight: 600; text-align: center;
+  background: var(--primary); color: #FFFFFF;
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  font-size: 13px; font-weight: 700; text-align: center;
 }
-.ds-map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ds-map-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 @media (max-width: 640px) { .ds-map-grid { grid-template-columns: 1fr; } }
 .ds-map-card {
-  border: 0.5px solid var(--alpha-15); border-radius: var(--radius-xl);
-  overflow: hidden; background: var(--gray-0);
-  transition: box-shadow 0.15s cubic-bezier(0.4,0,0.2,1);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  overflow: hidden; background: var(--surface);
+  transition: box-shadow 0.08s ease;
 }
-.ds-map-card:hover { box-shadow: var(--elevation-200); }
+.ds-map-card:hover { box-shadow: var(--shadow-context); }
 .ds-map-hd {
-  padding: 10px 14px; font-size: 0.8125rem; font-weight: 600; color: var(--gray-0);
+  padding: 8px 12px; font-size: 11px; font-weight: 600; color: #FFFFFF;
+  letter-spacing: 0.06em; text-transform: uppercase;
 }
 .ds-map-bd {
-  padding: 10px 14px; font-size: 0.75rem; line-height: 1.6; color: var(--gray-500);
-  background: var(--gray-50);
+  padding: 8px 12px; font-size: 12px; line-height: 1.6; color: var(--text-secondary);
+  background: var(--surface-nested);
 }
 .ds-pill {
-  display: inline-block; background: var(--gray-0); border: 0.5px solid var(--alpha-10);
-  padding: 2px 10px; border-radius: 999px; margin: 2px 1px;
-  font-size: 0.6875rem; font-weight: 500; color: var(--gray-750);
+  display: inline-block; background: var(--surface); border: 1px solid var(--border);
+  padding: 2px 8px; border-radius: var(--radius-sm); margin: 2px 1px;
+  font-size: 11px; font-weight: 400; color: var(--text-primary);
 }
 
 /* ===== Bar Chart ===== */
 .ds-bars { max-width: 560px; }
-.ds-bar-row { display: flex; align-items: center; margin-bottom: 6px; gap: 10px; }
+.ds-bar-row { display: flex; align-items: center; margin-bottom: 4px; gap: 8px; }
 .ds-bar-lbl {
-  width: 110px; text-align: right; font-size: 0.75rem;
-  color: var(--gray-500); flex-shrink: 0;
+  width: 110px; text-align: right; font-size: 12px;
+  color: var(--text-secondary); flex-shrink: 0;
 }
-.ds-bar-track { flex: 1; background: var(--gray-100); border-radius: 4px; height: 26px; }
+.ds-bar-track { flex: 1; background: var(--surface-nested); border-radius: var(--radius-xs); height: 24px; }
 .ds-bar-fill {
-  height: 100%; border-radius: 4px; display: flex; align-items: center;
-  padding-left: 10px; font-size: 0.6875rem; font-weight: 600; color: var(--gray-0);
-  min-width: 26px; transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
+  height: 100%; border-radius: var(--radius-xs); display: flex; align-items: center;
+  padding-left: 8px; font-size: 11px; font-weight: 600; color: #FFFFFF;
+  min-width: 24px; transition: width 0.08s ease;
 }
 
 /* ===== Table ===== */
-.ds-tbl { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+.ds-tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
 .ds-tbl thead th {
-  text-align: left; padding: 8px 10px; font-size: 0.6875rem; font-weight: 600;
-  letter-spacing: 0.65px; text-transform: uppercase; color: var(--gray-400);
-  border-bottom: 0.5px solid var(--alpha-15);
+  text-align: left; padding: 6px 10px; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
 }
 .ds-tbl td {
-  padding: 8px 10px; color: var(--gray-750); border-bottom: 0.5px solid var(--alpha-10);
+  padding: 6px 10px; color: var(--text-primary); border-bottom: 1px solid var(--border);
 }
-.ds-tbl tr:hover td { background: var(--gray-50); }
+.ds-tbl tr:hover td { background: var(--surface); }
 .ds-tbl code {
-  font-family: var(--mono); font-size: 0.75rem;
-  background: var(--gray-100); padding: 2px 6px; border-radius: 4px; color: var(--gray-750);
+  font-family: var(--mono); font-size: 12px;
+  background: var(--surface-nested); padding: 2px 6px; border-radius: var(--radius-xs); color: var(--secondary);
 }
 
 /* ===== Timeline ===== */
 .ds-tl { position: relative; padding: 8px 0 8px 20px; }
 .ds-tl::before {
   content: ''; position: absolute; left: 4px; top: 0; bottom: 0;
-  width: 1px; background: var(--gray-200);
+  width: 1px; background: var(--border);
 }
 .ds-tl-item {
-  position: relative; margin-left: 20px; margin-bottom: 20px;
-  padding: 16px 20px; background: var(--gray-50);
-  border: 0.5px solid var(--alpha-10); border-radius: var(--radius-xl);
+  position: relative; margin-left: 20px; margin-bottom: 16px;
+  padding: 12px 16px; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
 }
 .ds-tl-item::before {
-  content: ''; position: absolute; left: -28px; top: 20px;
-  width: 8px; height: 8px; background: var(--green);
-  border-radius: 50%; border: 2px solid var(--gray-0);
+  content: ''; position: absolute; left: -28px; top: 16px;
+  width: 8px; height: 8px; background: var(--success);
+  border-radius: 50%; border: 2px solid var(--bg);
 }
-.ds-tl-date { font-size: 0.875rem; font-weight: 600; color: var(--gray-1000); }
-.ds-tl-sub { font-size: 0.8125rem; color: var(--gray-500); margin-top: 2px; }
-.ds-tl-scores { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.ds-tl-date { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.ds-tl-sub { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.ds-tl-scores { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
 .ds-tl-score {
-  background: var(--gray-0); border: 0.5px solid var(--alpha-10);
-  padding: 3px 10px; border-radius: 999px;
-  font-size: 0.6875rem; font-weight: 600; color: var(--gray-750);
+  background: var(--surface-nested); border: 1px solid var(--border);
+  padding: 2px 8px; border-radius: var(--radius-sm);
+  font-size: 11px; font-weight: 600; color: var(--text-primary);
 }
-.ds-tl-desc { font-size: 0.8125rem; color: var(--gray-500); margin-top: 10px; line-height: 1.5; }
+.ds-tl-desc { font-size: 12px; color: var(--text-secondary); margin-top: 8px; line-height: 1.5; }
 
 /* ===== KPI Cards ===== */
-.ds-kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.ds-kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
 .ds-kpi {
-  background: var(--gray-50); border: 0.5px solid var(--alpha-10);
-  border-radius: var(--radius-xl); padding: 16px; text-align: center;
-  transition: box-shadow 0.15s cubic-bezier(0.4,0,0.2,1);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 16px; text-align: center;
+  transition: box-shadow 0.08s ease;
 }
-.ds-kpi:hover { box-shadow: var(--elevation-200); }
-.ds-kpi-v { font-size: 1.5rem; font-weight: 700; color: var(--gray-1000); }
-.ds-kpi-l { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.65px; text-transform: uppercase; color: var(--gray-400); margin-top: 4px; }
+.ds-kpi:hover { box-shadow: var(--shadow-context); }
+.ds-kpi-v { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+.ds-kpi-l { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); margin-top: 4px; }
 </style>
 
 <h1>コンテンツダッシュボード</h1>
@@ -138,14 +139,14 @@ nav_order: 2
 <div class="ds-donut-section">
   <div class="ds-donut"><div class="ds-donut-hole">57</div></div>
   <div class="ds-legend">
-    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--green);"></span><span class="ds-legend-n">4</span><span class="ds-legend-t">共通ガイド</span></div>
-    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--red);"></span><span class="ds-legend-n">9</span><span class="ds-legend-t">実装工程</span></div>
-    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--orange);"></span><span class="ds-legend-n">6</span><span class="ds-legend-t">単体テスト工程</span></div>
-    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--blue);"></span><span class="ds-legend-n">3</span><span class="ds-legend-t">リサーチ</span></div>
-    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--gray-400);"></span><span class="ds-legend-n">9</span><span class="ds-legend-t">レビュー記録</span></div>
-    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--gray-200);"></span><span class="ds-legend-n">1</span><span class="ds-legend-t">要件・背景</span></div>
-    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--gray-900);"></span><span class="ds-legend-n">21</span><span class="ds-legend-t">参考資料（GitHub）</span></div>
-    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--purple);"></span><span class="ds-legend-n">5</span><span class="ds-legend-t">参考資料（Claude）</span></div>
+    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--success);"></span><span class="ds-legend-n">4</span><span class="ds-legend-t">共通ガイド</span></div>
+    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--error);"></span><span class="ds-legend-n">9</span><span class="ds-legend-t">実装工程</span></div>
+    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--warning);"></span><span class="ds-legend-n">6</span><span class="ds-legend-t">単体テスト工程</span></div>
+    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--secondary);"></span><span class="ds-legend-n">3</span><span class="ds-legend-t">リサーチ</span></div>
+    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--text-secondary);"></span><span class="ds-legend-n">9</span><span class="ds-legend-t">レビュー記録</span></div>
+    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--border);"></span><span class="ds-legend-n">1</span><span class="ds-legend-t">要件・背景</span></div>
+    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:var(--text-primary);"></span><span class="ds-legend-n">21</span><span class="ds-legend-t">参考資料（GitHub）</span></div>
+    <div class="ds-legend-row"><span class="ds-legend-dot" style="background:#924ff7;"></span><span class="ds-legend-n">5</span><span class="ds-legend-t">参考資料（Claude）</span></div>
   </div>
 </div>
 
@@ -158,7 +159,7 @@ nav_order: 2
   <div class="ds-map-root">AI駆動開発プレイブック — 全57ページ</div>
   <div class="ds-map-grid">
     <div class="ds-map-card">
-      <div class="ds-map-hd" style="background:var(--green);">共通ガイド — 4ページ</div>
+      <div class="ds-map-hd" style="background:var(--success);">共通ガイド — 4ページ</div>
       <div class="ds-map-bd">
         <span class="ds-pill">クイックスタート</span>
         <span class="ds-pill">Copilotモード解説</span>
@@ -167,7 +168,7 @@ nav_order: 2
       </div>
     </div>
     <div class="ds-map-card">
-      <div class="ds-map-hd" style="background:var(--red);">実装工程 — 9ページ</div>
+      <div class="ds-map-hd" style="background:var(--error);">実装工程 — 9ページ</div>
       <div class="ds-map-bd">
         <span class="ds-pill">UC01: コード骨格生成</span>
         <span class="ds-pill">UC02: 既存コード改修</span>
@@ -180,7 +181,7 @@ nav_order: 2
       </div>
     </div>
     <div class="ds-map-card">
-      <div class="ds-map-hd" style="background:var(--orange);">単体テスト工程 — 6ページ</div>
+      <div class="ds-map-hd" style="background:var(--warning);">単体テスト工程 — 6ページ</div>
       <div class="ds-map-bd">
         <span class="ds-pill">UC01: テスト自動生成</span>
         <span class="ds-pill">UC02: テストデータ生成</span>
@@ -190,7 +191,7 @@ nav_order: 2
       </div>
     </div>
     <div class="ds-map-card">
-      <div class="ds-map-hd" style="background:var(--blue);">リサーチ — 3ページ</div>
+      <div class="ds-map-hd" style="background:var(--secondary);">リサーチ — 3ページ</div>
       <div class="ds-map-bd">
         <span class="ds-pill">ADR: プロンプト構成設計</span>
         <span class="ds-pill">PoC ペットクリニック計画</span>
@@ -198,14 +199,14 @@ nav_order: 2
       </div>
     </div>
     <div class="ds-map-card">
-      <div class="ds-map-hd" style="background:var(--gray-500);">レビュー記録 — 9ページ</div>
+      <div class="ds-map-hd" style="background:var(--text-secondary);">レビュー記録 — 9ページ</div>
       <div class="ds-map-bd">
         <span class="ds-pill">2026-04-02 #01</span> PM / リーダー / 開発者 / サマリー<br/>
         <span class="ds-pill">2026-04-03 #01</span> PM / リーダー / 開発者 / サマリー
       </div>
     </div>
     <div class="ds-map-card">
-      <div class="ds-map-hd" style="background:var(--gray-900);">参考資料 — 26ページ</div>
+      <div class="ds-map-hd" style="background:var(--surface-float);">参考資料 — 26ページ</div>
       <div class="ds-map-bd">
         <span class="ds-pill">GitHub Copilot設定</span> copilot-instructions / カスタマイズ / セットアップ / エージェント×2 / スキル×18<br/>
         <span class="ds-pill">Claude Code</span> コマンド×5
@@ -219,15 +220,15 @@ nav_order: 2
 <h2>スキル一覧と分類</h2>
 
 <div class="ds-bars">
-  <div class="ds-bar-row"><span class="ds-bar-lbl">セットアップ</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:33%;background:var(--gray-500);">2</div></div></div>
-  <div class="ds-bar-row"><span class="ds-bar-lbl">実装 — 分析</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:100%;background:var(--red);">6</div></div></div>
-  <div class="ds-bar-row"><span class="ds-bar-lbl">実装 — 変更</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:50%;background:var(--red);">3</div></div></div>
-  <div class="ds-bar-row"><span class="ds-bar-lbl">実装 — 生成</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:17%;background:var(--red);">1</div></div></div>
-  <div class="ds-bar-row"><span class="ds-bar-lbl">実装 — 確認</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:17%;background:var(--red);">1</div></div></div>
-  <div class="ds-bar-row"><span class="ds-bar-lbl">テスト — 設計</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:17%;background:var(--orange);">1</div></div></div>
-  <div class="ds-bar-row"><span class="ds-bar-lbl">テスト — 生成</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:33%;background:var(--orange);">2</div></div></div>
-  <div class="ds-bar-row"><span class="ds-bar-lbl">テスト — 分析</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:17%;background:var(--orange);">1</div></div></div>
-  <div class="ds-bar-row"><span class="ds-bar-lbl">テスト — 変更</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:17%;background:var(--orange);">1</div></div></div>
+  <div class="ds-bar-row"><span class="ds-bar-lbl">セットアップ</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:33%;background:var(--text-secondary);">2</div></div></div>
+  <div class="ds-bar-row"><span class="ds-bar-lbl">実装 — 分析</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:100%;background:var(--error);">6</div></div></div>
+  <div class="ds-bar-row"><span class="ds-bar-lbl">実装 — 変更</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:50%;background:var(--error);">3</div></div></div>
+  <div class="ds-bar-row"><span class="ds-bar-lbl">実装 — 生成</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:17%;background:var(--error);">1</div></div></div>
+  <div class="ds-bar-row"><span class="ds-bar-lbl">実装 — 確認</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:17%;background:var(--error);">1</div></div></div>
+  <div class="ds-bar-row"><span class="ds-bar-lbl">テスト — 設計</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:17%;background:var(--warning);">1</div></div></div>
+  <div class="ds-bar-row"><span class="ds-bar-lbl">テスト — 生成</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:33%;background:var(--warning);">2</div></div></div>
+  <div class="ds-bar-row"><span class="ds-bar-lbl">テスト — 分析</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:17%;background:var(--warning);">1</div></div></div>
+  <div class="ds-bar-row"><span class="ds-bar-lbl">テスト — 変更</span><div class="ds-bar-track"><div class="ds-bar-fill" style="width:17%;background:var(--warning);">1</div></div></div>
 </div>
 
 <h4>スキル詳細</h4>
