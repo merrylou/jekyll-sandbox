@@ -1,84 +1,154 @@
 /* ==========================================================================
-   Design System — Red Broadcast
-   Content-first, video-platform-inspired light interface
+   Design System — デジタル庁準拠 (DADS: Digital Agency Design System)
+   https://design.digital.go.jp/
    ========================================================================== */
 
 /* ----- Fonts ----- */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Noto+Sans+Mono:wght@400&display=swap');
 
-/* ----- Tokens ----- */
+/* ----- Design Tokens ----- */
 :root {
-  --sans: 'Roboto', ui-sans-serif, system-ui, sans-serif;
-  --mono: 'Roboto Mono', ui-monospace, consolas, monospace;
+  /* Font */
+  --font-sans: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Noto Sans Mono', monospace;
 
-  --primary: #FF0000;
-  --primary-hover: #CC0000;
-  --secondary: #065FD4;
+  /* Primitive Colors — Blue */
+  --blue-50: #e8f1fe;
+  --blue-100: #d9e6ff;
+  --blue-200: #c5d7fb;
+  --blue-300: #9db7f9;
+  --blue-400: #7096f8;
+  --blue-500: #4979f5;
+  --blue-600: #3460fb;
+  --blue-700: #264af4;
+  --blue-800: #0031d8;
+  --blue-900: #0017c1;
+  --blue-1000: #00118f;
+  --blue-1100: #000071;
+  --blue-1200: #000060;
 
-  --bg: #FFFFFF;
-  --surface: #F2F2F2;
-  --surface-hover: #E8E8E8;
+  /* Primitive Colors — Others */
+  --green-600: #259d63;
+  --green-800: #197a4b;
+  --red-800: #ec0000;
+  --red-900: #ce0000;
+  --yellow-300: #ffd43d;
+  --yellow-700: #b78f00;
+  --orange-600: #fb5b01;
+  --orange-800: #c74700;
+  --magenta-900: #8b008b;
+  --purple-700: #7b40bf;
 
-  --text-primary: #0F0F0F;
-  --text-secondary: #606060;
-  --border: #E5E5E5;
+  /* Neutral */
+  --white: #ffffff;
+  --black: #000000;
+  --gray-50: #f2f2f2;
+  --gray-100: #e6e6e6;
+  --gray-200: #cccccc;
+  --gray-300: #b3b3b3;
+  --gray-420: #949494;
+  --gray-536: #767676;
+  --gray-600: #666666;
+  --gray-700: #4d4d4d;
+  --gray-800: #333333;
+  --gray-900: #1a1a1a;
 
-  --success: #2BA640;
-  --warning: #FB8C00;
-  --error: #FF0000;
+  /* Semantic */
+  --color-primary: var(--blue-900);
+  --color-primary-hover: var(--blue-1000);
+  --color-link: var(--blue-1000);
+  --color-link-visited: var(--magenta-900);
+  --color-link-active: var(--orange-800);
+  --color-text: var(--gray-800);
+  --color-text-heading: var(--gray-900);
+  --color-text-secondary: var(--gray-600);
+  --color-bg: var(--white);
+  --color-bg-secondary: var(--gray-50);
+  --color-border: var(--gray-420);
+  --color-border-strong: var(--gray-600);
+  --color-disabled: var(--gray-300);
+  --color-success: var(--green-600);
+  --color-error: var(--red-800);
+  --color-warning: var(--yellow-700);
+  --color-warning-orange: var(--orange-600);
 
-  --radius-xs: 2px;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-pill: 9999px;
+  /* Border Radius */
+  --radius-4: 0.25rem;
+  --radius-6: 0.375rem;
+  --radius-8: 0.5rem;
+  --radius-12: 0.75rem;
+  --radius-16: 1rem;
+  --radius-24: 1.5rem;
+  --radius-full: 624.9375rem;
 
-  --shadow-1: 0 1px 2px rgba(0,0,0,0.1);
-  --shadow-2: 0 4px 32px rgba(0,0,0,0.1);
-  --shadow-3: 0 8px 40px rgba(0,0,0,0.2);
+  /* Elevation */
+  --elevation-1: 0 2px 8px 1px rgba(0,0,0,0.1), 0 1px 5px 0 rgba(0,0,0,0.3);
+  --elevation-2: 0 2px 12px 2px rgba(0,0,0,0.1), 0 1px 6px 0 rgba(0,0,0,0.3);
+  --elevation-3: 0 4px 16px 3px rgba(0,0,0,0.1), 0 1px 6px 0 rgba(0,0,0,0.3);
 
-  --sidebar-w: 240px;
-  --header-h: 56px;
+  /* Layout */
+  --sidebar-w: 288px;
+  --header-h: 64px;
 }
 
 /* ----- Reset ----- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 14px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-body { font-family: var(--sans); color: var(--text-primary); background: var(--bg); line-height: 1.43; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  font-family: var(--font-sans); color: var(--color-text);
+  background: var(--color-bg); line-height: 1.7; letter-spacing: 0.02em;
+}
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; }
 
+/* Focus — DADS アクセシビリティ共通パターン */
+:focus-visible {
+  outline: 4px solid var(--black);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--yellow-300);
+}
+a:focus-visible {
+  background-color: var(--yellow-300);
+  border-radius: var(--radius-4);
+}
+
 /* ==========================================================================
-   Header — 56px top bar
+   Header — グローバルメニュー風 64px
    ========================================================================== */
 .site-header {
   position: sticky; top: 0; z-index: 100;
   height: var(--header-h);
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 16px;
+  padding: 0 24px;
 }
 .header-inner { display: flex; align-items: center; gap: 16px; }
 .header-logo {
-  font-size: 18px; font-weight: 700; color: var(--text-primary);
-  display: flex; align-items: center; gap: 4px;
-  letter-spacing: -0.02em;
+  font-size: 1.125rem; font-weight: 700; color: var(--color-text-heading);
+  letter-spacing: 0.02em;
+  display: flex; align-items: center; gap: 8px;
 }
-.header-logo-accent { color: var(--primary); font-size: 20px; line-height: 1; }
+.header-logo-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; background: var(--color-primary);
+  color: var(--white); font-weight: 700; font-size: 14px;
+  border-radius: var(--radius-6);
+}
 .header-sep {
-  width: 1px; height: 20px; background: var(--border);
+  width: 1px; height: 24px; background: var(--color-border);
 }
 .header-desc {
-  font-size: 12px; color: var(--text-secondary); font-weight: 400;
+  font-size: 0.875rem; color: var(--color-text-secondary); font-weight: 400;
 }
 .nav-toggle {
-  display: none; background: none; border: none; cursor: pointer;
-  color: var(--text-secondary); padding: 8px;
-  width: 40px; height: 40px; border-radius: 50%;
-  display: none; align-items: center; justify-content: center;
+  display: none; background: none; border: 1px solid var(--color-border);
+  cursor: pointer; color: var(--color-text);
+  padding: 8px; border-radius: var(--radius-8);
+  width: 44px; height: 44px;
+  align-items: center; justify-content: center;
 }
-.nav-toggle:hover { background: var(--surface); }
+.nav-toggle:hover { background: var(--color-bg-secondary); }
 
 /* ==========================================================================
    Layout
@@ -88,41 +158,44 @@ img { max-width: 100%; }
 }
 
 /* ==========================================================================
-   Sidebar Navigation
+   Sidebar Navigation — メニューリスト
    ========================================================================== */
 .site-nav {
   width: var(--sidebar-w); flex-shrink: 0;
   position: sticky; top: var(--header-h);
   height: calc(100vh - var(--header-h));
   overflow-y: auto;
-  padding: 12px;
-  border-right: none;
-  background: var(--bg);
+  padding: 16px 12px 32px;
+  border-right: 1px solid var(--color-border);
+  background: var(--color-bg);
 }
 
-/* Section label — compact metadata style */
-.nav-section { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+/* Section label */
+.nav-section { margin-top: 24px; }
+.nav-section:first-child { margin-top: 0; }
 .nav-section-label {
-  font-size: 12px; font-weight: 500;
-  letter-spacing: 0.02em; text-transform: uppercase;
-  color: var(--text-secondary);
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--color-text-secondary);
   padding: 8px 12px 4px;
+  letter-spacing: 0.04em;
 }
 
-/* Nav items */
+/* Nav items — DADS menu-list standard パターン */
 .nav-item {
-  display: block; padding: 8px 12px; border-radius: var(--radius-md);
-  font-size: 14px; font-weight: 400; color: var(--text-primary);
-  transition: background 0.1s ease;
+  display: block; padding: 8px 12px; border-radius: var(--radius-8);
+  font-size: 0.875rem; font-weight: 400; color: var(--color-text);
+  transition: background 0.15s ease;
   cursor: pointer;
 }
-.nav-item:hover { background: var(--surface); }
+.nav-item:hover { background: var(--color-bg-secondary); }
 .nav-item.is-active {
-  background: var(--surface); font-weight: 700;
+  background: var(--blue-100);
+  color: var(--blue-1000);
+  font-weight: 700;
 }
-.nav-top { font-weight: 500; }
+.nav-top { font-weight: 700; }
 
-/* Accordion */
+/* Accordion — details/summary (DADS accordion pattern) */
 .nav-group { border: none; }
 .nav-group > summary {
   list-style: none; display: flex; align-items: center; justify-content: space-between;
@@ -130,118 +203,142 @@ img { max-width: 100%; }
 .nav-group > summary::-webkit-details-marker { display: none; }
 .nav-group > summary::after {
   content: ''; width: 16px; height: 16px; flex-shrink: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M6 4l4 4-4 4' stroke='%23606060' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M6 4l4 4-4 4' stroke='%23949494' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
   transition: transform 0.15s ease;
 }
 .nav-group[open] > summary::after { transform: rotate(90deg); }
 .nav-children { padding-left: 12px; overflow: hidden; }
 .nav-child {
-  font-size: 14px; font-weight: 400; color: var(--text-secondary);
-  padding: 6px 12px; border-radius: var(--radius-md);
+  font-size: 0.875rem; font-weight: 400; color: var(--color-text);
+  padding: 6px 12px; border-radius: var(--radius-8);
 }
-.nav-child:hover { background: var(--surface); color: var(--text-primary); }
-.nav-child.is-active { background: var(--surface); color: var(--text-primary); font-weight: 700; }
+.nav-child:hover { background: var(--color-bg-secondary); }
+.nav-child.is-active {
+  background: var(--blue-100);
+  color: var(--blue-1000);
+  font-weight: 700;
+}
 
-/* Scrollbar — native (per design spec) */
+/* Scrollbar */
+.site-nav::-webkit-scrollbar { width: 6px; }
+.site-nav::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 3px; }
+.site-nav::-webkit-scrollbar-track { background: transparent; }
 
 /* ==========================================================================
    Main Content
    ========================================================================== */
 .main-content {
   flex: 1; min-width: 0;
-  padding: 24px 48px 64px;
+  padding: 32px 48px 80px;
   max-width: 860px;
 }
 
-/* ----- Prose typography ----- */
+/* ----- Prose typography (DADS prose pattern) ----- */
 .prose h1 {
-  font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
-  color: var(--text-primary); margin: 0 0 8px; line-height: 1.33;
+  font-size: 1.75rem; font-weight: 700; letter-spacing: 0.02em;
+  color: var(--color-text-heading); margin: 0 0 16px; line-height: 1.4;
 }
 .prose h2 {
-  font-size: 20px; font-weight: 500; color: var(--text-primary);
-  margin: 32px 0 12px; line-height: 1.4;
-  padding-bottom: 8px; border-bottom: 1px solid var(--border);
+  font-size: 1.375rem; font-weight: 700; color: var(--color-text-heading);
+  margin: 48px 0 16px; line-height: 1.4;
+  padding-bottom: 8px; border-bottom: 1px solid var(--color-border);
 }
 .prose h3 {
-  font-size: 16px; font-weight: 500; color: var(--text-primary);
-  margin: 24px 0 8px;
+  font-size: 1.125rem; font-weight: 700; color: var(--color-text-heading);
+  margin: 32px 0 8px; line-height: 1.4;
 }
 .prose h4 {
-  font-size: 12px; font-weight: 500; letter-spacing: 0.02em;
-  text-transform: uppercase; color: var(--text-secondary);
-  margin: 20px 0 8px;
+  font-size: 1rem; font-weight: 700; color: var(--color-text-heading);
+  margin: 24px 0 8px; line-height: 1.5;
 }
 .prose p {
-  margin: 0 0 16px; color: var(--text-primary); font-size: 14px; line-height: 1.43;
+  margin: 0 0 16px; color: var(--color-text); font-size: 1rem; line-height: 1.7;
 }
 .prose ul, .prose ol {
   margin: 0 0 16px; padding-left: 24px;
 }
-.prose li { margin-bottom: 4px; }
-.prose strong { font-weight: 700; color: var(--text-primary); }
+.prose li { margin-bottom: 4px; line-height: 1.7; }
+.prose strong { font-weight: 700; }
 .prose a {
-  color: var(--secondary); text-decoration: none; font-weight: 500;
+  color: var(--color-link); text-decoration: underline; font-weight: 400;
 }
-.prose a:hover { text-decoration: underline; }
+.prose a:hover { color: var(--color-primary-hover); }
+.prose a:visited { color: var(--color-link-visited); }
+.prose a:active { color: var(--color-link-active); }
 .prose hr {
-  border: none; border-top: 1px solid var(--border); margin: 24px 0;
+  border: none; border-top: 1px solid var(--color-border); margin: 32px 0;
 }
 .prose blockquote {
-  border-left: 4px solid var(--border); margin: 0 0 16px;
-  padding: 8px 16px; color: var(--text-secondary); font-style: normal;
+  border-left: 4px solid var(--color-primary); margin: 0 0 16px;
+  padding: 12px 16px; color: var(--color-text); font-style: normal;
+  background: var(--color-bg-secondary); border-radius: 0 var(--radius-8) var(--radius-8) 0;
 }
 
 /* ----- Code ----- */
 .prose code {
-  font-family: var(--mono); font-size: 14px;
-  background: var(--surface); padding: 2px 6px; border-radius: var(--radius-sm);
-  color: var(--text-primary);
+  font-family: var(--font-mono); font-size: 0.875rem;
+  background: var(--color-bg-secondary); padding: 2px 6px; border-radius: var(--radius-4);
+  color: var(--color-text);
 }
 .prose pre {
-  background: var(--text-primary); color: #FFFFFF;
-  border-radius: var(--radius-lg); padding: 16px 20px;
-  overflow-x: auto; margin: 0 0 16px; font-size: 14px; line-height: 1.43;
+  background: var(--gray-900); color: var(--white);
+  border-radius: var(--radius-8); padding: 16px 20px;
+  overflow-x: auto; margin: 0 0 16px; font-size: 0.875rem; line-height: 1.5;
 }
 .prose pre code {
   background: none; padding: 0; color: inherit; font-size: inherit;
 }
 
-/* ----- Tables ----- */
+/* ----- Tables (DADS table pattern) ----- */
 .prose table {
-  width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 14px;
+  width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 0.875rem;
 }
 .prose thead th {
-  text-align: left; padding: 8px 12px;
-  font-size: 12px; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase;
-  color: var(--text-secondary); border-bottom: 1px solid var(--border);
+  text-align: left; padding: 12px 16px;
+  font-size: 0.875rem; font-weight: 700;
+  color: var(--color-text-heading);
+  background: var(--gray-100);
+  border-bottom: 1px solid var(--black);
 }
 .prose td {
-  padding: 8px 12px; border-bottom: 1px solid var(--border);
-  color: var(--text-primary);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
 }
-.prose tr:hover td { background: var(--surface); }
+.prose tr:hover td { background: var(--blue-50); }
 
 /* ----- Images ----- */
-.prose img { border-radius: var(--radius-lg); }
+.prose img { border-radius: var(--radius-8); }
 
 /* ==========================================================================
-   Responsive
+   Desktop enhancement (48rem+)
+   ========================================================================== */
+@media (min-width: 48rem) {
+  body { font-size: 1.0625rem; }
+  .prose h2 { margin-top: 64px; }
+}
+
+/* ==========================================================================
+   Responsive (mobile)
    ========================================================================== */
 @media (max-width: 768px) {
   .site-nav {
     position: fixed; top: var(--header-h); left: 0; bottom: 0;
     z-index: 90; transform: translateX(-100%);
-    transition: transform 0.15s ease;
-    box-shadow: none; width: 280px;
-    background: var(--bg);
+    transition: transform 0.2s ease;
+    box-shadow: none; width: var(--sidebar-w);
+    background: var(--color-bg);
   }
   body.nav-open .site-nav {
     transform: translateX(0);
-    box-shadow: var(--shadow-2);
+    box-shadow: var(--elevation-2);
+  }
+  body.nav-open::after {
+    content: ''; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.1); z-index: 89;
   }
   .nav-toggle { display: flex; }
   .header-desc { display: none; }
   .header-sep { display: none; }
-  .main-content { padding: 16px 16px 48px; }
+  .main-content { padding: 24px 16px 48px; }
 }
