@@ -1,0 +1,269 @@
+---
+layout: default
+title: ダッシュボード
+nav_order: 2
+---
+
+<h1>コンテンツダッシュボード</h1>
+<p>AI駆動開発プレイブックのコンテンツ構造を可視化します。</p>
+
+<hr />
+
+<!-- ========== カテゴリ別ページ数 ========== -->
+<h2 id="カテゴリ別ページ数">カテゴリ別ページ数</h2>
+<div style="max-width: 520px; margin: 0 auto; padding: 20px 0;">
+  <canvas id="categoryChart"></canvas>
+</div>
+
+<hr />
+
+<!-- ========== コンテンツマップ ========== -->
+<h2 id="コンテンツマップ">コンテンツマップ</h2>
+<p>プレイブック全体の構成を示します。</p>
+
+<style>
+.content-map { display: flex; flex-direction: column; gap: 16px; }
+.map-root {
+  background: #1a73e8; color: #fff; text-align: center;
+  padding: 14px 24px; border-radius: 8px; font-size: 1.2em; font-weight: bold;
+}
+.map-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.map-category {
+  flex: 1; min-width: 280px;
+  border: 2px solid #e0e0e0; border-radius: 8px; overflow: hidden;
+}
+.map-category-header {
+  padding: 10px 16px; color: #fff; font-weight: bold; font-size: 0.95em;
+}
+.map-category-body {
+  padding: 10px 16px; background: #fff; font-size: 0.85em; line-height: 1.8;
+}
+.map-category-body code {
+  background: #f0f0f0; padding: 1px 6px; border-radius: 3px; font-size: 0.9em;
+}
+.map-tag {
+  display: inline-block; background: #f5f5f5; border: 1px solid #ddd;
+  padding: 2px 8px; border-radius: 4px; margin: 2px 2px; font-size: 0.85em;
+}
+</style>
+
+<div class="content-map">
+  <div class="map-root">AI駆動開発プレイブック — 全57ページ</div>
+
+  <div class="map-row">
+    <div class="map-category">
+      <div class="map-category-header" style="background:#34a853;">共通ガイド — 4ページ</div>
+      <div class="map-category-body">
+        <span class="map-tag">クイックスタート</span>
+        <span class="map-tag">Copilotモード解説</span>
+        <span class="map-tag">レビューチェックリスト</span>
+        <span class="map-tag">アンチパターン集</span>
+      </div>
+    </div>
+    <div class="map-category">
+      <div class="map-category-header" style="background:#ea4335;">実装工程 — 9ページ</div>
+      <div class="map-category-body">
+        <span class="map-tag">UC01: コード骨格生成</span>
+        <span class="map-tag">UC02: 既存コード改修</span>
+        <span class="map-tag">UC03: リファクタリング</span>
+        <span class="map-tag">UC04: コードベース理解</span>
+        <span class="map-tag">UC05: レビュー前チェック</span>
+        <span class="map-tag">UC06: 修正箇所特定</span>
+        <span class="map-tag">UC07: エラーログ解析</span>
+        <span class="map-tag">UC08: 修正方針策定</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-row">
+    <div class="map-category">
+      <div class="map-category-header" style="background:#f9a825; color:#333;">単体テスト工程 — 6ページ</div>
+      <div class="map-category-body">
+        <span class="map-tag">UC01: テスト自動生成</span>
+        <span class="map-tag">UC02: テストデータ生成</span>
+        <span class="map-tag">UC03: カバレッジ補完</span>
+        <span class="map-tag">UC04: テストコード改善</span>
+        <span class="map-tag">UC05: テスト仕様設計</span>
+      </div>
+    </div>
+    <div class="map-category">
+      <div class="map-category-header" style="background:#9334e6;">リサーチ — 3ページ</div>
+      <div class="map-category-body">
+        <span class="map-tag">ADR: プロンプト構成設計</span>
+        <span class="map-tag">PoC ペットクリニック計画</span>
+        <span class="map-tag">Spring Boot OSS候補</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-row">
+    <div class="map-category">
+      <div class="map-category-header" style="background:#e67c73;">レビュー記録 — 9ページ</div>
+      <div class="map-category-body">
+        <span class="map-tag">2026-04-02 #01</span> PM / リーダー / 開発者 / サマリー<br/>
+        <span class="map-tag">2026-04-03 #01</span> PM / リーダー / 開発者 / サマリー
+      </div>
+    </div>
+    <div class="map-category">
+      <div class="map-category-header" style="background:#607d8b;">参考資料 — 26ページ</div>
+      <div class="map-category-body">
+        <strong>GitHub Copilot設定</strong>: copilot-instructions / カスタマイズ / セットアップ / エージェント×2 / スキル×18<br/>
+        <strong>Claude Code</strong>: コマンド×5
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<!-- ========== スキル一覧と分類 ========== -->
+<h2 id="スキル一覧と分類">スキル一覧と分類</h2>
+<div style="max-width: 700px; margin: 0 auto; padding: 20px 0;">
+  <canvas id="skillChart"></canvas>
+</div>
+
+<h3>スキル詳細</h3>
+<table>
+  <thead>
+    <tr><th>カテゴリ</th><th>サブカテゴリ</th><th>スキル名</th><th>説明</th></tr>
+  </thead>
+  <tbody>
+  {% for skill in site.data.skills %}
+    <tr>
+      <td>{{ skill.category }}</td>
+      <td>{{ skill.subcategory }}</td>
+      <td><code>/{{ skill.name }}</code></td>
+      <td>{{ skill.description }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<hr />
+
+<!-- ========== レビュー履歴 ========== -->
+<h2 id="レビュー履歴">レビュー履歴</h2>
+
+<style>
+.timeline { position: relative; padding: 20px 0; }
+.timeline::before {
+  content: ''; position: absolute; left: 20px; top: 0; bottom: 0;
+  width: 3px; background: #1a73e8;
+}
+.timeline-item {
+  position: relative; margin-left: 50px; margin-bottom: 30px;
+  padding: 16px 20px; background: #f8f9fa; border-radius: 8px;
+  border-left: 4px solid #1a73e8;
+}
+.timeline-item::before {
+  content: ''; position: absolute; left: -38px; top: 20px;
+  width: 12px; height: 12px; background: #1a73e8;
+  border-radius: 50%; border: 3px solid #fff;
+}
+.timeline-date { font-weight: bold; font-size: 1.1em; color: #1a73e8; margin-bottom: 8px; }
+.timeline-scores { display: flex; gap: 16px; flex-wrap: wrap; margin: 8px 0; }
+.timeline-score {
+  background: #fff; padding: 4px 12px; border-radius: 4px;
+  font-size: 0.9em; border: 1px solid #e0e0e0;
+}
+.timeline-desc { color: #555; font-size: 0.95em; margin-top: 8px; }
+</style>
+
+<div class="timeline">
+  <div class="timeline-item">
+    <div class="timeline-date">2026-04-02 #01</div>
+    <div>初版ドラフトの全体レビュー</div>
+    <div class="timeline-scores">
+      <span class="timeline-score">PM: 4/5</span>
+      <span class="timeline-score">リーダー: 4/5</span>
+      <span class="timeline-score">開発者: 4/5</span>
+    </div>
+    <div class="timeline-desc">
+      「読まれる設計」「段階的導入パス（UC04から）」「人間が確認すべきこと + よくある落とし穴の二段構え」が全ロールから高評価
+    </div>
+  </div>
+  <div class="timeline-item">
+    <div class="timeline-date">2026-04-03 #01</div>
+    <div>Copilotネイティブ設定導入後のレビュー</div>
+    <div class="timeline-scores">
+      <span class="timeline-score">PM: 4/5</span>
+      <span class="timeline-score">リーダー: 4/5</span>
+      <span class="timeline-score">開発者: 4/5</span>
+    </div>
+    <div class="timeline-desc">
+      全ロール維持（質的向上）。Copilotネイティブ設定への移行が完了し、実用性がさらに向上
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<!-- ========== サマリー ========== -->
+<h2 id="サマリー">サマリー</h2>
+
+<table>
+  <thead><tr><th>指標</th><th>値</th></tr></thead>
+  <tbody>
+    <tr><td>総ページ数</td><td>57</td></tr>
+    <tr><td>ドキュメントページ</td><td>32</td></tr>
+    <tr><td>参考資料ページ</td><td>25</td></tr>
+    <tr><td>ユースケース数</td><td>13（実装8 + テスト5）</td></tr>
+    <tr><td>スキル数</td><td>18（セットアップ2 + 実装11 + テスト5）</td></tr>
+    <tr><td>エージェント数</td><td>2（@implementer, @tester）</td></tr>
+    <tr><td>レビューセッション</td><td>2回</td></tr>
+  </tbody>
+</table>
+
+<!-- ========== Scripts ========== -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script>
+window.addEventListener('load', function() {
+  // Category donut chart
+  var ctx1 = document.getElementById('categoryChart');
+  if (ctx1) {
+    new Chart(ctx1.getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        labels: ['共通ガイド', '実装工程', '単体テスト工程', 'リサーチ', 'レビュー記録', '要件・背景', '参考資料（GitHub）', '参考資料（Claude）'],
+        datasets: [{
+          data: [4, 9, 6, 3, 9, 1, 21, 5],
+          backgroundColor: ['#34a853','#ea4335','#f9a825','#9334e6','#e67c73','#78909c','#4285f4','#ff6d01'],
+          borderWidth: 2, borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { size: 13 }, padding: 16 } },
+          title: { display: true, text: 'カテゴリ別ページ構成', font: { size: 18 } }
+        }
+      }
+    });
+  }
+
+  // Skill bar chart
+  var ctx2 = document.getElementById('skillChart');
+  if (ctx2) {
+    new Chart(ctx2.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['セットアップ', '実装 — 分析', '実装 — 変更', '実装 — 生成', '実装 — 確認', 'テスト — 設計', 'テスト — 生成', 'テスト — 分析', 'テスト — 変更'],
+        datasets: [{
+          label: 'スキル数',
+          data: [2, 6, 3, 1, 1, 1, 2, 1, 1],
+          backgroundColor: ['#607d8b','#ef5350','#ef5350','#ef5350','#ef5350','#fdd835','#fdd835','#fdd835','#fdd835'],
+          borderRadius: 4
+        }]
+      },
+      options: {
+        indexAxis: 'y', responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'スキル分類別の内訳', font: { size: 18 } }
+        },
+        scales: { x: { beginAtZero: true, ticks: { stepSize: 1 } } }
+      }
+    });
+  }
+});
+</script>
