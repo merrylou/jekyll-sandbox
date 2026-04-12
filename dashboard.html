@@ -11,8 +11,47 @@ nav_order: 2
 
 <!-- ========== カテゴリ別ページ数 ========== -->
 <h2 id="カテゴリ別ページ数">カテゴリ別ページ数</h2>
-<div style="max-width: 520px; margin: 0 auto; padding: 20px 0;">
-  <canvas id="categoryChart"></canvas>
+
+<style>
+.donut-wrapper { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; justify-content: center; padding: 20px 0; }
+.donut {
+  width: 220px; height: 220px; border-radius: 50%; position: relative;
+  background: conic-gradient(
+    #34a853 0deg 25.2deg,
+    #ea4335 25.2deg 82.1deg,
+    #f9a825 82.1deg 119.9deg,
+    #9334e6 119.9deg 139.0deg,
+    #e67c73 139.0deg 195.8deg,
+    #78909c 195.8deg 202.3deg,
+    #4285f4 202.3deg 334.7deg,
+    #ff6d01 334.7deg 360deg
+  );
+}
+.donut::after {
+  content: '57'; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); width: 120px; height: 120px;
+  background: #fff; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2em; font-weight: bold; color: #333;
+}
+.donut-legend { display: flex; flex-direction: column; gap: 6px; }
+.donut-legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.9em; }
+.donut-dot { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+.donut-count { font-weight: bold; min-width: 24px; text-align: right; }
+</style>
+
+<div class="donut-wrapper">
+  <div class="donut"></div>
+  <div class="donut-legend">
+    <div class="donut-legend-item"><span class="donut-dot" style="background:#34a853;"></span><span class="donut-count">4</span> 共通ガイド</div>
+    <div class="donut-legend-item"><span class="donut-dot" style="background:#ea4335;"></span><span class="donut-count">9</span> 実装工程</div>
+    <div class="donut-legend-item"><span class="donut-dot" style="background:#f9a825;"></span><span class="donut-count">6</span> 単体テスト工程</div>
+    <div class="donut-legend-item"><span class="donut-dot" style="background:#9334e6;"></span><span class="donut-count">3</span> リサーチ</div>
+    <div class="donut-legend-item"><span class="donut-dot" style="background:#e67c73;"></span><span class="donut-count">9</span> レビュー記録</div>
+    <div class="donut-legend-item"><span class="donut-dot" style="background:#78909c;"></span><span class="donut-count">1</span> 要件・背景</div>
+    <div class="donut-legend-item"><span class="donut-dot" style="background:#4285f4;"></span><span class="donut-count">21</span> 参考資料（GitHub）</div>
+    <div class="donut-legend-item"><span class="donut-dot" style="background:#ff6d01;"></span><span class="donut-count">5</span> 参考資料（Claude）</div>
+  </div>
 </div>
 
 <hr />
@@ -118,8 +157,25 @@ nav_order: 2
 
 <!-- ========== スキル一覧と分類 ========== -->
 <h2 id="スキル一覧と分類">スキル一覧と分類</h2>
-<div style="max-width: 700px; margin: 0 auto; padding: 20px 0;">
-  <canvas id="skillChart"></canvas>
+
+<style>
+.bar-chart { max-width: 600px; margin: 20px auto; }
+.bar-row { display: flex; align-items: center; margin-bottom: 8px; }
+.bar-label { width: 140px; text-align: right; padding-right: 12px; font-size: 0.85em; flex-shrink: 0; }
+.bar-track { flex: 1; background: #f0f0f0; border-radius: 4px; height: 28px; position: relative; }
+.bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: #fff; font-weight: bold; font-size: 0.85em; min-width: 28px; }
+</style>
+
+<div class="bar-chart">
+  <div class="bar-row"><span class="bar-label">セットアップ</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:#607d8b;">2</div></div></div>
+  <div class="bar-row"><span class="bar-label">実装 — 分析</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#ef5350;">6</div></div></div>
+  <div class="bar-row"><span class="bar-label">実装 — 変更</span><div class="bar-track"><div class="bar-fill" style="width:50%;background:#ef5350;">3</div></div></div>
+  <div class="bar-row"><span class="bar-label">実装 — 生成</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#ef5350;">1</div></div></div>
+  <div class="bar-row"><span class="bar-label">実装 — 確認</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#ef5350;">1</div></div></div>
+  <div class="bar-row"><span class="bar-label">テスト — 設計</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#fdd835;color:#333;">1</div></div></div>
+  <div class="bar-row"><span class="bar-label">テスト — 生成</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:#fdd835;color:#333;">2</div></div></div>
+  <div class="bar-row"><span class="bar-label">テスト — 分析</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#fdd835;color:#333;">1</div></div></div>
+  <div class="bar-row"><span class="bar-label">テスト — 変更</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#fdd835;color:#333;">1</div></div></div>
 </div>
 
 <h3>スキル詳細</h3>
@@ -214,62 +270,3 @@ nav_order: 2
   </tbody>
 </table>
 
-<!-- ========== Scripts ========== -->
-<script>
-(function() {
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js';
-  s.onload = function() { initCharts(); };
-  document.head.appendChild(s);
-})();
-
-function initCharts() {
-  // Category donut chart
-  var ctx1 = document.getElementById('categoryChart');
-  if (ctx1) {
-    new Chart(ctx1.getContext('2d'), {
-      type: 'doughnut',
-      data: {
-        labels: ['共通ガイド', '実装工程', '単体テスト工程', 'リサーチ', 'レビュー記録', '要件・背景', '参考資料（GitHub）', '参考資料（Claude）'],
-        datasets: [{
-          data: [4, 9, 6, 3, 9, 1, 21, 5],
-          backgroundColor: ['#34a853','#ea4335','#f9a825','#9334e6','#e67c73','#78909c','#4285f4','#ff6d01'],
-          borderWidth: 2, borderColor: '#fff'
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { position: 'bottom', labels: { font: { size: 13 }, padding: 16 } },
-          title: { display: true, text: 'カテゴリ別ページ構成', font: { size: 18 } }
-        }
-      }
-    });
-  }
-
-  // Skill bar chart
-  var ctx2 = document.getElementById('skillChart');
-  if (ctx2) {
-    new Chart(ctx2.getContext('2d'), {
-      type: 'bar',
-      data: {
-        labels: ['セットアップ', '実装 — 分析', '実装 — 変更', '実装 — 生成', '実装 — 確認', 'テスト — 設計', 'テスト — 生成', 'テスト — 分析', 'テスト — 変更'],
-        datasets: [{
-          label: 'スキル数',
-          data: [2, 6, 3, 1, 1, 1, 2, 1, 1],
-          backgroundColor: ['#607d8b','#ef5350','#ef5350','#ef5350','#ef5350','#fdd835','#fdd835','#fdd835','#fdd835'],
-          borderRadius: 4
-        }]
-      },
-      options: {
-        indexAxis: 'y', responsive: true,
-        plugins: {
-          legend: { display: false },
-          title: { display: true, text: 'スキル分類別の内訳', font: { size: 18 } }
-        },
-        scales: { x: { beginAtZero: true, ticks: { stepSize: 1 } } }
-      }
-    });
-  }
-}
-</script>
