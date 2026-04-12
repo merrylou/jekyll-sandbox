@@ -4,53 +4,185 @@ title: ダッシュボード
 nav_order: 2
 ---
 
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400&display=swap');
+
+/* ===== Red Broadcast Design System ===== */
+.rb-dashboard { font-family: 'Roboto', sans-serif; color: #0F0F0F; }
+.rb-dashboard h1 { font-size: 24px; line-height: 32px; font-weight: 700; margin-bottom: 8px; }
+.rb-dashboard h2 { font-size: 20px; line-height: 28px; font-weight: 500; margin-top: 32px; margin-bottom: 16px; }
+.rb-dashboard h3 { font-size: 14px; line-height: 20px; font-weight: 500; margin-top: 24px; margin-bottom: 12px; }
+.rb-dashboard p { font-size: 14px; line-height: 20px; font-weight: 400; color: #606060; }
+.rb-dashboard hr { border: none; border-top: 1px solid #E5E5E5; margin: 24px 0; }
+
+/* ===== Chip Bar ===== */
+.rb-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.rb-chip {
+  display: inline-block; padding: 8px 12px; border-radius: 9999px;
+  background: #F2F2F2; color: #0F0F0F; font-size: 14px; font-weight: 500;
+  text-decoration: none; cursor: pointer; border: none;
+}
+.rb-chip--active { background: #0F0F0F; color: #FFFFFF; }
+
+/* ===== Donut Chart ===== */
+.rb-donut-wrapper {
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+  justify-content: center; padding: 24px 0;
+}
+.rb-donut {
+  width: 200px; height: 200px; border-radius: 9999px; position: relative;
+  background: conic-gradient(
+    #2BA640 0deg 25.2deg,
+    #FF0000 25.2deg 82.1deg,
+    #FB8C00 82.1deg 119.9deg,
+    #065FD4 119.9deg 139.0deg,
+    #606060 139.0deg 195.8deg,
+    #E5E5E5 195.8deg 202.3deg,
+    #0F0F0F 202.3deg 334.7deg,
+    #CC0000 334.7deg 360deg
+  );
+}
+.rb-donut::after {
+  content: '57'; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); width: 112px; height: 112px;
+  background: #FFFFFF; border-radius: 9999px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; font-weight: 700; color: #0F0F0F;
+}
+.rb-legend { display: flex; flex-direction: column; gap: 8px; }
+.rb-legend-item {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; font-weight: 400; color: #0F0F0F;
+}
+.rb-legend-dot { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+.rb-legend-count { font-weight: 500; min-width: 20px; text-align: right; color: #0F0F0F; }
+.rb-legend-label { color: #606060; }
+
+/* ===== Content Map ===== */
+.rb-map { display: flex; flex-direction: column; gap: 16px; }
+.rb-map-root {
+  background: #0F0F0F; color: #FFFFFF; text-align: center;
+  padding: 12px 24px; border-radius: 12px;
+  font-size: 14px; font-weight: 500;
+}
+.rb-map-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.rb-map-card {
+  flex: 1; min-width: 280px; border-radius: 12px; overflow: hidden;
+  background: #FFFFFF;
+}
+.rb-map-header {
+  padding: 12px 16px; color: #FFFFFF;
+  font-size: 14px; font-weight: 500;
+}
+.rb-map-body {
+  padding: 12px 16px; background: #F2F2F2;
+  font-size: 12px; line-height: 18px; color: #606060;
+}
+.rb-tag {
+  display: inline-block; background: #FFFFFF; border: none;
+  padding: 4px 12px; border-radius: 9999px; margin: 3px 2px;
+  font-size: 12px; font-weight: 500; color: #0F0F0F;
+}
+
+/* ===== Bar Chart ===== */
+.rb-bars { max-width: 600px; padding: 8px 0; }
+.rb-bar-row {
+  display: flex; align-items: center; margin-bottom: 8px; gap: 12px;
+}
+.rb-bar-label {
+  width: 120px; text-align: right; font-size: 12px; font-weight: 400;
+  color: #606060; flex-shrink: 0;
+}
+.rb-bar-track {
+  flex: 1; background: #F2F2F2; border-radius: 4px; height: 32px;
+  overflow: hidden;
+}
+.rb-bar-fill {
+  height: 100%; border-radius: 4px;
+  display: flex; align-items: center; padding-left: 12px;
+  font-size: 12px; font-weight: 500; color: #FFFFFF;
+  min-width: 32px;
+}
+
+/* ===== Skill Table ===== */
+.rb-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.rb-table thead { border-bottom: 1px solid #E5E5E5; }
+.rb-table th {
+  text-align: left; padding: 8px 12px;
+  font-size: 12px; font-weight: 500; color: #606060;
+  letter-spacing: 0.02em;
+}
+.rb-table td { padding: 8px 12px; font-size: 14px; font-weight: 400; color: #0F0F0F; }
+.rb-table tr { border-bottom: 1px solid #F2F2F2; }
+.rb-table code {
+  font-family: 'Roboto Mono', monospace; font-size: 12px;
+  background: #F2F2F2; padding: 2px 8px; border-radius: 4px;
+}
+
+/* ===== Timeline ===== */
+.rb-timeline { position: relative; padding: 16px 0; margin-left: 16px; }
+.rb-timeline::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: #E5E5E5;
+}
+.rb-tl-item {
+  position: relative; margin-left: 32px; margin-bottom: 24px;
+  padding: 16px; background: #F2F2F2; border-radius: 12px;
+}
+.rb-tl-item::before {
+  content: ''; position: absolute; left: -38px; top: 20px;
+  width: 10px; height: 10px; background: #FF0000;
+  border-radius: 9999px; border: 2px solid #FFFFFF;
+}
+.rb-tl-date { font-size: 14px; font-weight: 500; color: #0F0F0F; margin-bottom: 4px; }
+.rb-tl-subject { font-size: 12px; font-weight: 400; color: #606060; margin-bottom: 8px; }
+.rb-tl-scores { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.rb-tl-score {
+  background: #FFFFFF; padding: 4px 12px; border-radius: 9999px;
+  font-size: 12px; font-weight: 500; color: #0F0F0F;
+}
+.rb-tl-desc { font-size: 12px; font-weight: 400; color: #606060; line-height: 18px; }
+
+/* ===== Summary ===== */
+.rb-summary { display: flex; flex-wrap: wrap; gap: 12px; padding: 8px 0; }
+.rb-stat {
+  flex: 1; min-width: 140px; background: #F2F2F2; border-radius: 12px;
+  padding: 16px; text-align: center;
+}
+.rb-stat-value { font-size: 24px; font-weight: 700; color: #0F0F0F; }
+.rb-stat-label { font-size: 12px; font-weight: 400; color: #606060; margin-top: 4px; }
+</style>
+
+<div class="rb-dashboard">
+
 <h1>コンテンツダッシュボード</h1>
 <p>AI駆動開発プレイブックのコンテンツ構造を可視化します。</p>
+
+<div class="rb-chips">
+  <span class="rb-chip rb-chip--active">すべて</span>
+  <a href="#カテゴリ別ページ数" class="rb-chip">ページ構成</a>
+  <a href="#コンテンツマップ" class="rb-chip">コンテンツマップ</a>
+  <a href="#スキル一覧と分類" class="rb-chip">スキル</a>
+  <a href="#レビュー履歴" class="rb-chip">レビュー</a>
+  <a href="#サマリー" class="rb-chip">サマリー</a>
+</div>
 
 <hr />
 
 <!-- ========== カテゴリ別ページ数 ========== -->
 <h2 id="カテゴリ別ページ数">カテゴリ別ページ数</h2>
 
-<style>
-.donut-wrapper { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; justify-content: center; padding: 20px 0; }
-.donut {
-  width: 220px; height: 220px; border-radius: 50%; position: relative;
-  background: conic-gradient(
-    #34a853 0deg 25.2deg,
-    #ea4335 25.2deg 82.1deg,
-    #f9a825 82.1deg 119.9deg,
-    #9334e6 119.9deg 139.0deg,
-    #e67c73 139.0deg 195.8deg,
-    #78909c 195.8deg 202.3deg,
-    #4285f4 202.3deg 334.7deg,
-    #ff6d01 334.7deg 360deg
-  );
-}
-.donut::after {
-  content: '57'; position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%); width: 120px; height: 120px;
-  background: #fff; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2em; font-weight: bold; color: #333;
-}
-.donut-legend { display: flex; flex-direction: column; gap: 6px; }
-.donut-legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.9em; }
-.donut-dot { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
-.donut-count { font-weight: bold; min-width: 24px; text-align: right; }
-</style>
-
-<div class="donut-wrapper">
-  <div class="donut"></div>
-  <div class="donut-legend">
-    <div class="donut-legend-item"><span class="donut-dot" style="background:#34a853;"></span><span class="donut-count">4</span> 共通ガイド</div>
-    <div class="donut-legend-item"><span class="donut-dot" style="background:#ea4335;"></span><span class="donut-count">9</span> 実装工程</div>
-    <div class="donut-legend-item"><span class="donut-dot" style="background:#f9a825;"></span><span class="donut-count">6</span> 単体テスト工程</div>
-    <div class="donut-legend-item"><span class="donut-dot" style="background:#9334e6;"></span><span class="donut-count">3</span> リサーチ</div>
-    <div class="donut-legend-item"><span class="donut-dot" style="background:#e67c73;"></span><span class="donut-count">9</span> レビュー記録</div>
-    <div class="donut-legend-item"><span class="donut-dot" style="background:#78909c;"></span><span class="donut-count">1</span> 要件・背景</div>
-    <div class="donut-legend-item"><span class="donut-dot" style="background:#4285f4;"></span><span class="donut-count">21</span> 参考資料（GitHub）</div>
-    <div class="donut-legend-item"><span class="donut-dot" style="background:#ff6d01;"></span><span class="donut-count">5</span> 参考資料（Claude）</div>
+<div class="rb-donut-wrapper">
+  <div class="rb-donut"></div>
+  <div class="rb-legend">
+    <div class="rb-legend-item"><span class="rb-legend-dot" style="background:#2BA640;"></span><span class="rb-legend-count">4</span><span class="rb-legend-label">共通ガイド</span></div>
+    <div class="rb-legend-item"><span class="rb-legend-dot" style="background:#FF0000;"></span><span class="rb-legend-count">9</span><span class="rb-legend-label">実装工程</span></div>
+    <div class="rb-legend-item"><span class="rb-legend-dot" style="background:#FB8C00;"></span><span class="rb-legend-count">6</span><span class="rb-legend-label">単体テスト工程</span></div>
+    <div class="rb-legend-item"><span class="rb-legend-dot" style="background:#065FD4;"></span><span class="rb-legend-count">3</span><span class="rb-legend-label">リサーチ</span></div>
+    <div class="rb-legend-item"><span class="rb-legend-dot" style="background:#606060;"></span><span class="rb-legend-count">9</span><span class="rb-legend-label">レビュー記録</span></div>
+    <div class="rb-legend-item"><span class="rb-legend-dot" style="background:#E5E5E5;"></span><span class="rb-legend-count">1</span><span class="rb-legend-label">要件・背景</span></div>
+    <div class="rb-legend-item"><span class="rb-legend-dot" style="background:#0F0F0F;"></span><span class="rb-legend-count">21</span><span class="rb-legend-label">参考資料（GitHub）</span></div>
+    <div class="rb-legend-item"><span class="rb-legend-dot" style="background:#CC0000;"></span><span class="rb-legend-count">5</span><span class="rb-legend-label">参考資料（Claude）</span></div>
   </div>
 </div>
 
@@ -60,94 +192,68 @@ nav_order: 2
 <h2 id="コンテンツマップ">コンテンツマップ</h2>
 <p>プレイブック全体の構成を示します。</p>
 
-<style>
-.content-map { display: flex; flex-direction: column; gap: 16px; }
-.map-root {
-  background: #1a73e8; color: #fff; text-align: center;
-  padding: 14px 24px; border-radius: 8px; font-size: 1.2em; font-weight: bold;
-}
-.map-row { display: flex; gap: 12px; flex-wrap: wrap; }
-.map-category {
-  flex: 1; min-width: 280px;
-  border: 2px solid #e0e0e0; border-radius: 8px; overflow: hidden;
-}
-.map-category-header {
-  padding: 10px 16px; color: #fff; font-weight: bold; font-size: 0.95em;
-}
-.map-category-body {
-  padding: 10px 16px; background: #fff; font-size: 0.85em; line-height: 1.8;
-}
-.map-category-body code {
-  background: #f0f0f0; padding: 1px 6px; border-radius: 3px; font-size: 0.9em;
-}
-.map-tag {
-  display: inline-block; background: #f5f5f5; border: 1px solid #ddd;
-  padding: 2px 8px; border-radius: 4px; margin: 2px 2px; font-size: 0.85em;
-}
-</style>
+<div class="rb-map">
+  <div class="rb-map-root">AI駆動開発プレイブック — 全57ページ</div>
 
-<div class="content-map">
-  <div class="map-root">AI駆動開発プレイブック — 全57ページ</div>
-
-  <div class="map-row">
-    <div class="map-category">
-      <div class="map-category-header" style="background:#34a853;">共通ガイド — 4ページ</div>
-      <div class="map-category-body">
-        <span class="map-tag">クイックスタート</span>
-        <span class="map-tag">Copilotモード解説</span>
-        <span class="map-tag">レビューチェックリスト</span>
-        <span class="map-tag">アンチパターン集</span>
+  <div class="rb-map-row">
+    <div class="rb-map-card">
+      <div class="rb-map-header" style="background:#2BA640;">共通ガイド — 4ページ</div>
+      <div class="rb-map-body">
+        <span class="rb-tag">クイックスタート</span>
+        <span class="rb-tag">Copilotモード解説</span>
+        <span class="rb-tag">レビューチェックリスト</span>
+        <span class="rb-tag">アンチパターン集</span>
       </div>
     </div>
-    <div class="map-category">
-      <div class="map-category-header" style="background:#ea4335;">実装工程 — 9ページ</div>
-      <div class="map-category-body">
-        <span class="map-tag">UC01: コード骨格生成</span>
-        <span class="map-tag">UC02: 既存コード改修</span>
-        <span class="map-tag">UC03: リファクタリング</span>
-        <span class="map-tag">UC04: コードベース理解</span>
-        <span class="map-tag">UC05: レビュー前チェック</span>
-        <span class="map-tag">UC06: 修正箇所特定</span>
-        <span class="map-tag">UC07: エラーログ解析</span>
-        <span class="map-tag">UC08: 修正方針策定</span>
+    <div class="rb-map-card">
+      <div class="rb-map-header" style="background:#FF0000;">実装工程 — 9ページ</div>
+      <div class="rb-map-body">
+        <span class="rb-tag">UC01: コード骨格生成</span>
+        <span class="rb-tag">UC02: 既存コード改修</span>
+        <span class="rb-tag">UC03: リファクタリング</span>
+        <span class="rb-tag">UC04: コードベース理解</span>
+        <span class="rb-tag">UC05: レビュー前チェック</span>
+        <span class="rb-tag">UC06: 修正箇所特定</span>
+        <span class="rb-tag">UC07: エラーログ解析</span>
+        <span class="rb-tag">UC08: 修正方針策定</span>
       </div>
     </div>
   </div>
 
-  <div class="map-row">
-    <div class="map-category">
-      <div class="map-category-header" style="background:#f9a825; color:#333;">単体テスト工程 — 6ページ</div>
-      <div class="map-category-body">
-        <span class="map-tag">UC01: テスト自動生成</span>
-        <span class="map-tag">UC02: テストデータ生成</span>
-        <span class="map-tag">UC03: カバレッジ補完</span>
-        <span class="map-tag">UC04: テストコード改善</span>
-        <span class="map-tag">UC05: テスト仕様設計</span>
+  <div class="rb-map-row">
+    <div class="rb-map-card">
+      <div class="rb-map-header" style="background:#FB8C00;">単体テスト工程 — 6ページ</div>
+      <div class="rb-map-body">
+        <span class="rb-tag">UC01: テスト自動生成</span>
+        <span class="rb-tag">UC02: テストデータ生成</span>
+        <span class="rb-tag">UC03: カバレッジ補完</span>
+        <span class="rb-tag">UC04: テストコード改善</span>
+        <span class="rb-tag">UC05: テスト仕様設計</span>
       </div>
     </div>
-    <div class="map-category">
-      <div class="map-category-header" style="background:#9334e6;">リサーチ — 3ページ</div>
-      <div class="map-category-body">
-        <span class="map-tag">ADR: プロンプト構成設計</span>
-        <span class="map-tag">PoC ペットクリニック計画</span>
-        <span class="map-tag">Spring Boot OSS候補</span>
+    <div class="rb-map-card">
+      <div class="rb-map-header" style="background:#065FD4;">リサーチ — 3ページ</div>
+      <div class="rb-map-body">
+        <span class="rb-tag">ADR: プロンプト構成設計</span>
+        <span class="rb-tag">PoC ペットクリニック計画</span>
+        <span class="rb-tag">Spring Boot OSS候補</span>
       </div>
     </div>
   </div>
 
-  <div class="map-row">
-    <div class="map-category">
-      <div class="map-category-header" style="background:#e67c73;">レビュー記録 — 9ページ</div>
-      <div class="map-category-body">
-        <span class="map-tag">2026-04-02 #01</span> PM / リーダー / 開発者 / サマリー<br/>
-        <span class="map-tag">2026-04-03 #01</span> PM / リーダー / 開発者 / サマリー
+  <div class="rb-map-row">
+    <div class="rb-map-card">
+      <div class="rb-map-header" style="background:#606060;">レビュー記録 — 9ページ</div>
+      <div class="rb-map-body">
+        <span class="rb-tag">2026-04-02 #01</span> PM / リーダー / 開発者 / サマリー<br/>
+        <span class="rb-tag">2026-04-03 #01</span> PM / リーダー / 開発者 / サマリー
       </div>
     </div>
-    <div class="map-category">
-      <div class="map-category-header" style="background:#607d8b;">参考資料 — 26ページ</div>
-      <div class="map-category-body">
-        <strong>GitHub Copilot設定</strong>: copilot-instructions / カスタマイズ / セットアップ / エージェント×2 / スキル×18<br/>
-        <strong>Claude Code</strong>: コマンド×5
+    <div class="rb-map-card">
+      <div class="rb-map-header" style="background:#0F0F0F;">参考資料 — 26ページ</div>
+      <div class="rb-map-body">
+        <span class="rb-tag">GitHub Copilot設定</span> copilot-instructions / カスタマイズ / セットアップ / エージェント×2 / スキル×18<br/>
+        <span class="rb-tag">Claude Code</span> コマンド×5
       </div>
     </div>
   </div>
@@ -158,28 +264,20 @@ nav_order: 2
 <!-- ========== スキル一覧と分類 ========== -->
 <h2 id="スキル一覧と分類">スキル一覧と分類</h2>
 
-<style>
-.bar-chart { max-width: 600px; margin: 20px auto; }
-.bar-row { display: flex; align-items: center; margin-bottom: 8px; }
-.bar-label { width: 140px; text-align: right; padding-right: 12px; font-size: 0.85em; flex-shrink: 0; }
-.bar-track { flex: 1; background: #f0f0f0; border-radius: 4px; height: 28px; position: relative; }
-.bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: #fff; font-weight: bold; font-size: 0.85em; min-width: 28px; }
-</style>
-
-<div class="bar-chart">
-  <div class="bar-row"><span class="bar-label">セットアップ</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:#607d8b;">2</div></div></div>
-  <div class="bar-row"><span class="bar-label">実装 — 分析</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#ef5350;">6</div></div></div>
-  <div class="bar-row"><span class="bar-label">実装 — 変更</span><div class="bar-track"><div class="bar-fill" style="width:50%;background:#ef5350;">3</div></div></div>
-  <div class="bar-row"><span class="bar-label">実装 — 生成</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#ef5350;">1</div></div></div>
-  <div class="bar-row"><span class="bar-label">実装 — 確認</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#ef5350;">1</div></div></div>
-  <div class="bar-row"><span class="bar-label">テスト — 設計</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#fdd835;color:#333;">1</div></div></div>
-  <div class="bar-row"><span class="bar-label">テスト — 生成</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:#fdd835;color:#333;">2</div></div></div>
-  <div class="bar-row"><span class="bar-label">テスト — 分析</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#fdd835;color:#333;">1</div></div></div>
-  <div class="bar-row"><span class="bar-label">テスト — 変更</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#fdd835;color:#333;">1</div></div></div>
+<div class="rb-bars">
+  <div class="rb-bar-row"><span class="rb-bar-label">セットアップ</span><div class="rb-bar-track"><div class="rb-bar-fill" style="width:33%;background:#606060;">2</div></div></div>
+  <div class="rb-bar-row"><span class="rb-bar-label">実装 — 分析</span><div class="rb-bar-track"><div class="rb-bar-fill" style="width:100%;background:#FF0000;">6</div></div></div>
+  <div class="rb-bar-row"><span class="rb-bar-label">実装 — 変更</span><div class="rb-bar-track"><div class="rb-bar-fill" style="width:50%;background:#FF0000;">3</div></div></div>
+  <div class="rb-bar-row"><span class="rb-bar-label">実装 — 生成</span><div class="rb-bar-track"><div class="rb-bar-fill" style="width:17%;background:#FF0000;">1</div></div></div>
+  <div class="rb-bar-row"><span class="rb-bar-label">実装 — 確認</span><div class="rb-bar-track"><div class="rb-bar-fill" style="width:17%;background:#FF0000;">1</div></div></div>
+  <div class="rb-bar-row"><span class="rb-bar-label">テスト — 設計</span><div class="rb-bar-track"><div class="rb-bar-fill" style="width:17%;background:#FB8C00;">1</div></div></div>
+  <div class="rb-bar-row"><span class="rb-bar-label">テスト — 生成</span><div class="rb-bar-track"><div class="rb-bar-fill" style="width:33%;background:#FB8C00;">2</div></div></div>
+  <div class="rb-bar-row"><span class="rb-bar-label">テスト — 分析</span><div class="rb-bar-track"><div class="rb-bar-fill" style="width:17%;background:#FB8C00;">1</div></div></div>
+  <div class="rb-bar-row"><span class="rb-bar-label">テスト — 変更</span><div class="rb-bar-track"><div class="rb-bar-fill" style="width:17%;background:#FB8C00;">1</div></div></div>
 </div>
 
 <h3>スキル詳細</h3>
-<table>
+<table class="rb-table">
   <thead>
     <tr><th>カテゴリ</th><th>サブカテゴリ</th><th>スキル名</th><th>説明</th></tr>
   </thead>
@@ -200,53 +298,28 @@ nav_order: 2
 <!-- ========== レビュー履歴 ========== -->
 <h2 id="レビュー履歴">レビュー履歴</h2>
 
-<style>
-.timeline { position: relative; padding: 20px 0; }
-.timeline::before {
-  content: ''; position: absolute; left: 20px; top: 0; bottom: 0;
-  width: 3px; background: #1a73e8;
-}
-.timeline-item {
-  position: relative; margin-left: 50px; margin-bottom: 30px;
-  padding: 16px 20px; background: #f8f9fa; border-radius: 8px;
-  border-left: 4px solid #1a73e8;
-}
-.timeline-item::before {
-  content: ''; position: absolute; left: -38px; top: 20px;
-  width: 12px; height: 12px; background: #1a73e8;
-  border-radius: 50%; border: 3px solid #fff;
-}
-.timeline-date { font-weight: bold; font-size: 1.1em; color: #1a73e8; margin-bottom: 8px; }
-.timeline-scores { display: flex; gap: 16px; flex-wrap: wrap; margin: 8px 0; }
-.timeline-score {
-  background: #fff; padding: 4px 12px; border-radius: 4px;
-  font-size: 0.9em; border: 1px solid #e0e0e0;
-}
-.timeline-desc { color: #555; font-size: 0.95em; margin-top: 8px; }
-</style>
-
-<div class="timeline">
-  <div class="timeline-item">
-    <div class="timeline-date">2026-04-02 #01</div>
-    <div>初版ドラフトの全体レビュー</div>
-    <div class="timeline-scores">
-      <span class="timeline-score">PM: 4/5</span>
-      <span class="timeline-score">リーダー: 4/5</span>
-      <span class="timeline-score">開発者: 4/5</span>
+<div class="rb-timeline">
+  <div class="rb-tl-item">
+    <div class="rb-tl-date">2026-04-02 #01</div>
+    <div class="rb-tl-subject">初版ドラフトの全体レビュー</div>
+    <div class="rb-tl-scores">
+      <span class="rb-tl-score">PM: 4/5</span>
+      <span class="rb-tl-score">リーダー: 4/5</span>
+      <span class="rb-tl-score">開発者: 4/5</span>
     </div>
-    <div class="timeline-desc">
+    <div class="rb-tl-desc">
       「読まれる設計」「段階的導入パス（UC04から）」「人間が確認すべきこと + よくある落とし穴の二段構え」が全ロールから高評価
     </div>
   </div>
-  <div class="timeline-item">
-    <div class="timeline-date">2026-04-03 #01</div>
-    <div>Copilotネイティブ設定導入後のレビュー</div>
-    <div class="timeline-scores">
-      <span class="timeline-score">PM: 4/5</span>
-      <span class="timeline-score">リーダー: 4/5</span>
-      <span class="timeline-score">開発者: 4/5</span>
+  <div class="rb-tl-item">
+    <div class="rb-tl-date">2026-04-03 #01</div>
+    <div class="rb-tl-subject">Copilotネイティブ設定導入後のレビュー</div>
+    <div class="rb-tl-scores">
+      <span class="rb-tl-score">PM: 4/5</span>
+      <span class="rb-tl-score">リーダー: 4/5</span>
+      <span class="rb-tl-score">開発者: 4/5</span>
     </div>
-    <div class="timeline-desc">
+    <div class="rb-tl-desc">
       全ロール維持（質的向上）。Copilotネイティブ設定への移行が完了し、実用性がさらに向上
     </div>
   </div>
@@ -257,16 +330,12 @@ nav_order: 2
 <!-- ========== サマリー ========== -->
 <h2 id="サマリー">サマリー</h2>
 
-<table>
-  <thead><tr><th>指標</th><th>値</th></tr></thead>
-  <tbody>
-    <tr><td>総ページ数</td><td>57</td></tr>
-    <tr><td>ドキュメントページ</td><td>32</td></tr>
-    <tr><td>参考資料ページ</td><td>25</td></tr>
-    <tr><td>ユースケース数</td><td>13（実装8 + テスト5）</td></tr>
-    <tr><td>スキル数</td><td>18（セットアップ2 + 実装11 + テスト5）</td></tr>
-    <tr><td>エージェント数</td><td>2（@implementer, @tester）</td></tr>
-    <tr><td>レビューセッション</td><td>2回</td></tr>
-  </tbody>
-</table>
+<div class="rb-summary">
+  <div class="rb-stat"><div class="rb-stat-value">57</div><div class="rb-stat-label">総ページ数</div></div>
+  <div class="rb-stat"><div class="rb-stat-value">13</div><div class="rb-stat-label">ユースケース</div></div>
+  <div class="rb-stat"><div class="rb-stat-value">18</div><div class="rb-stat-label">スキル</div></div>
+  <div class="rb-stat"><div class="rb-stat-value">2</div><div class="rb-stat-label">エージェント</div></div>
+  <div class="rb-stat"><div class="rb-stat-value">2</div><div class="rb-stat-label">レビュー回</div></div>
+</div>
 
+</div>
