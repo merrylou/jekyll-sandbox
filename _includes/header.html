@@ -1,10 +1,10 @@
 <header class="site-header">
   <div class="header-inner">
-    <a href="{{ '/' | relative_url }}" class="header-logo"><span class="header-logo-accent">&#9632;</span> {{ site.title }}</a>
+    <button class="nav-toggle" aria-label="メニュー" onclick="document.body.classList.toggle('nav-open')">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <a href="{{ '/' | relative_url }}" class="header-logo"><span class="header-logo-accent">&#9654;</span> {{ site.title }}</a>
     <span class="header-sep"></span>
     <span class="header-desc">{{ site.description | truncate: 60 }}</span>
   </div>
-  <button class="nav-toggle" aria-label="メニュー" onclick="document.body.classList.toggle('nav-open')">
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-  </button>
 </header>
