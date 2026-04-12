@@ -1,0 +1,20 @@
+<header class="dads-mobile-header">
+  <a href="{{ '/' | relative_url }}" class="dads-mobile-header__logo">{{ site.title }}</a>
+  <button class="dads-mobile-header__menu-btn" aria-label="メニューを開く" onclick="toggleMobileMenu()">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+</header>
+
+<dialog class="dads-drawer" id="mobile-menu-drawer" onclick="if(event.target===this)toggleMobileMenu()">
+  <div class="dads-drawer__panel">
+    <div class="dads-drawer__header">
+      <a href="{{ '/' | relative_url }}" class="dads-drawer__logo">{{ site.title }}</a>
+      <button class="dads-drawer__close" aria-label="メニューを閉じる" onclick="toggleMobileMenu()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <nav class="dads-drawer__nav">
+      {% include nav-items.html %}
+    </nav>
+  </div>
+</dialog>

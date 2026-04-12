@@ -8,18 +8,46 @@
   <meta name="theme-color" content="#ffffff" />
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
 </head>
-<body>
+<body class="dads-page">
 
-  {% include header.html %}
+  {%- comment -%} モバイル専用ヘッダー (デスクトップでは非表示) {%- endcomment -%}
+  {% include mobile-header.html %}
 
-  <div class="site-wrapper">
-    {% include nav.html %}
-    <main class="main-content">
-      <article class="prose">
-        {{ content }}
-      </article>
+  <div class="dads-page__body">
+    {%- comment -%} サイドバー (デスクトップ: fixed全高 / モバイル: drawer) {%- endcomment -%}
+    {% include sidebar.html %}
+
+    {%- comment -%} メインコンテンツ {%- endcomment -%}
+    <main class="dads-page__main" id="mainContents">
+      <div class="dads-main">
+        <div class="dads-main__header">
+          {% if page.title %}<h1 class="dads-heading" id="page-title">{{ page.title }}</h1>{% endif %}
+        </div>
+        <div class="dads-main__body">
+          <article class="prose">
+            {{ content }}
+          </article>
+        </div>
+      </div>
+
+      <footer class="dads-footer">
+        <div class="dads-footer__links">
+          <span class="dads-footer__label">{{ site.title }}</span>
+          <span class="dads-footer__sep">—</span>
+          <span class="dads-footer__desc">Jekyll + GitHub Pages</span>
+        </div>
+      </footer>
     </main>
   </div>
+
+  <script>
+  function toggleMobileMenu(){
+    var d=document.getElementById('mobile-menu-drawer');
+    if(!d)return;
+    if(d.open){d.close();document.body.classList.remove('drawer-open');}
+    else{d.showModal();document.body.classList.add('drawer-open');}
+  }
+  </script>
 
 </body>
 </html>
