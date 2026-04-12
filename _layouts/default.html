@@ -8,46 +8,52 @@
   <meta name="theme-color" content="#ffffff" />
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
 </head>
-<body class="dads-page">
+<body>
 
-  {%- comment -%} モバイル専用ヘッダー (デスクトップでは非表示) {%- endcomment -%}
-  {% include mobile-header.html %}
+  {%- comment -%} Storybook Header — 72px sticky, frosted glass {%- endcomment -%}
+  <header class="sb-header">
+    <div class="sb-header__inner">
+      <a href="{{ '/' | relative_url }}" class="sb-header__logo">
+        <svg class="sb-header__logo-icon" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21.03.1l-.9-.08L19.93 4a.18.18 0 00.19.19l.93-.05-.02 2.14a.18.18 0 00.2.18l.93-.05L21.03.1z" fill="#FF4785"/>
+          <path d="M14.85 1.57C14.85.7 15.55 0 16.42 0h.04l3.84-.1.73 25.12-19.6 1A1.57 1.57 0 010 24.45V2.97c0-.82.63-1.5 1.44-1.56L14.85 .3v1.27z" fill="#FF4785"/>
+          <path d="M12.72 9.97c0 .49 3.14.25 3.56-.09 0-3.14-1.65-4.83-4.76-4.83-3.1 0-4.82 1.72-4.82 4.27 0 4.43 5.98 4.52 5.98 6.94 0 .69-.32 1.1-1.06 1.1-.97 0-1.36-.5-1.31-2.18 0-.38-3.64-.5-3.76 0-.26 3.93 2.17 5.07 5.12 5.07 2.86 0 5.1-1.52 5.1-4.27 0-4.75-6.07-4.62-6.07-6.98 0-.95.7-1.08 1.1-1.08.45 0 1.2.07.92 1.05z" fill="#FFF"/>
+        </svg>
+        {{ site.title }}
+      </a>
+      <nav class="sb-header__nav">
+        <a href="{{ '/' | relative_url }}" class="sb-header__nav-link {% if page.url == '/' %}is-active{% endif %}">Docs</a>
+        <a href="{{ '/dashboard.html' | relative_url }}" class="sb-header__nav-link {% if page.title == 'ダッシュボード' %}is-active{% endif %}">Dashboard</a>
+      </nav>
+      <button class="sb-nav-toggle" aria-label="メニューを開閉" onclick="document.body.classList.toggle('nav-open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
 
-  <div class="dads-page__body">
-    {%- comment -%} サイドバー (デスクトップ: fixed全高 / モバイル: drawer) {%- endcomment -%}
-    {% include sidebar.html %}
+  {%- comment -%} Page body — sidebar + main {%- endcomment -%}
+  <div class="sb-page">
+    <aside class="sb-sidebar">
+      <nav aria-label="サイトナビゲーション">
+        {% include nav-items.html %}
+      </nav>
+    </aside>
 
-    {%- comment -%} メインコンテンツ {%- endcomment -%}
-    <main class="dads-page__main" id="mainContents">
-      <div class="dads-main">
-        <div class="dads-main__header">
-          {% if page.title %}<h1 class="dads-heading" id="page-title">{{ page.title }}</h1>{% endif %}
-        </div>
-        <div class="dads-main__body">
-          <article class="prose">
-            {{ content }}
-          </article>
-        </div>
-      </div>
-
-      <footer class="dads-footer">
-        <div class="dads-footer__links">
-          <span class="dads-footer__label">{{ site.title }}</span>
-          <span class="dads-footer__sep">—</span>
-          <span class="dads-footer__desc">Jekyll + GitHub Pages</span>
-        </div>
-      </footer>
+    <main class="sb-main" id="mainContents">
+      {% if page.title %}<h1 class="sb-page-title">{{ page.title }}</h1>{% endif %}
+      <article class="prose">
+        {{ content }}
+      </article>
     </main>
   </div>
 
-  <script>
-  function toggleMobileMenu(){
-    var d=document.getElementById('mobile-menu-drawer');
-    if(!d)return;
-    if(d.open){d.close();document.body.classList.remove('drawer-open');}
-    else{d.showModal();document.body.classList.add('drawer-open');}
-  }
-  </script>
+  <footer class="sb-footer">
+    <div class="sb-footer__inner">
+      <span class="sb-footer__label">{{ site.title }}</span>
+      <span>—</span>
+      <span>Jekyll + GitHub Pages</span>
+    </div>
+  </footer>
 
 </body>
 </html>

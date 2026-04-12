@@ -1,111 +1,90 @@
-<ul class="dads-menu-list">
-  <li class="dads-menu-list__item">
-    <a href="{{ '/' | relative_url }}" class="dads-menu-list__link {% if page.url == '/' %}is-current{% endif %}">ホーム</a>
-  </li>
-  <li class="dads-menu-list__item">
-    <a href="{{ '/dashboard.html' | relative_url }}" class="dads-menu-list__link {% if page.title == 'ダッシュボード' %}is-current{% endif %}">ダッシュボード</a>
-  </li>
-</ul>
+<div class="sb-menu">
+  {%- comment -%} Top-level links {%- endcomment -%}
+  <a href="{{ '/' | relative_url }}" class="sb-menu__link {% if page.url == '/' %}is-current{% endif %}">ホーム</a>
+  <a href="{{ '/dashboard.html' | relative_url }}" class="sb-menu__link {% if page.title == 'ダッシュボード' %}is-current{% endif %}">ダッシュボード</a>
 
-<!-- ドキュメント -->
-<div class="dads-menu-section">
-  <div class="dads-menu-section__label">ドキュメント</div>
-  <ul class="dads-menu-list">
-    <li class="dads-menu-list__item dads-menu-list__item--has-children">
-      <details class="dads-menu-list__details" {% if page.parent == '共通ガイド' or page.grand_parent == '共通ガイド' %}open{% endif %}>
-        <summary class="dads-menu-list__link">共通ガイド</summary>
-        <ul class="dads-menu-list dads-menu-list--nested">
-          {% assign common = site.pages | where: "parent", "共通ガイド" | sort: "nav_order" %}
-          {% for p in common %}
-          <li class="dads-menu-list__item"><a href="{{ p.url | relative_url }}" class="dads-menu-list__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </details>
-    </li>
+  {%- comment -%} ドキュメント {%- endcomment -%}
+  <div class="sb-menu__section">
+    <div class="sb-menu__section-label">ドキュメント</div>
+  </div>
 
-    <li class="dads-menu-list__item dads-menu-list__item--has-children">
-      <details class="dads-menu-list__details" {% if page.parent == '実装工程' or page.grand_parent == '実装工程' %}open{% endif %}>
-        <summary class="dads-menu-list__link">実装工程</summary>
-        <ul class="dads-menu-list dads-menu-list--nested">
-          {% assign impl = site.pages | where: "parent", "実装工程" | sort: "nav_order" %}
-          {% for p in impl %}
-          <li class="dads-menu-list__item"><a href="{{ p.url | relative_url }}" class="dads-menu-list__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </details>
-    </li>
+  <details class="sb-menu__details" {% if page.parent == '共通ガイド' or page.grand_parent == '共通ガイド' %}open{% endif %}>
+    <summary class="sb-menu__link">共通ガイド</summary>
+    <div class="sb-menu__nested">
+      {% assign common = site.pages | where: "parent", "共通ガイド" | sort: "nav_order" %}
+      {% for p in common %}
+      <a href="{{ p.url | relative_url }}" class="sb-menu__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a>
+      {% endfor %}
+    </div>
+  </details>
 
-    <li class="dads-menu-list__item dads-menu-list__item--has-children">
-      <details class="dads-menu-list__details" {% if page.parent == '単体テスト工程' or page.grand_parent == '単体テスト工程' %}open{% endif %}>
-        <summary class="dads-menu-list__link">単体テスト工程</summary>
-        <ul class="dads-menu-list dads-menu-list--nested">
-          {% assign ut = site.pages | where: "parent", "単体テスト工程" | sort: "nav_order" %}
-          {% for p in ut %}
-          <li class="dads-menu-list__item"><a href="{{ p.url | relative_url }}" class="dads-menu-list__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </details>
-    </li>
+  <details class="sb-menu__details" {% if page.parent == '実装工程' or page.grand_parent == '実装工程' %}open{% endif %}>
+    <summary class="sb-menu__link">実装工程</summary>
+    <div class="sb-menu__nested">
+      {% assign impl = site.pages | where: "parent", "実装工程" | sort: "nav_order" %}
+      {% for p in impl %}
+      <a href="{{ p.url | relative_url }}" class="sb-menu__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a>
+      {% endfor %}
+    </div>
+  </details>
 
-    <li class="dads-menu-list__item dads-menu-list__item--has-children">
-      <details class="dads-menu-list__details" {% if page.parent == 'リサーチ' %}open{% endif %}>
-        <summary class="dads-menu-list__link">リサーチ</summary>
-        <ul class="dads-menu-list dads-menu-list--nested">
-          {% assign research = site.pages | where: "parent", "リサーチ" | sort: "nav_order" %}
-          {% for p in research %}
-          <li class="dads-menu-list__item"><a href="{{ p.url | relative_url }}" class="dads-menu-list__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </details>
-    </li>
+  <details class="sb-menu__details" {% if page.parent == '単体テスト工程' or page.grand_parent == '単体テスト工程' %}open{% endif %}>
+    <summary class="sb-menu__link">単体テスト工程</summary>
+    <div class="sb-menu__nested">
+      {% assign ut = site.pages | where: "parent", "単体テスト工程" | sort: "nav_order" %}
+      {% for p in ut %}
+      <a href="{{ p.url | relative_url }}" class="sb-menu__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a>
+      {% endfor %}
+    </div>
+  </details>
 
-    <li class="dads-menu-list__item dads-menu-list__item--has-children">
-      <details class="dads-menu-list__details" {% if page.parent == 'レビュー記録' %}open{% endif %}>
-        <summary class="dads-menu-list__link">レビュー記録</summary>
-        <ul class="dads-menu-list dads-menu-list--nested">
-          {% assign reviews = site.pages | where: "parent", "レビュー記録" | sort: "nav_order" %}
-          {% for p in reviews %}
-          <li class="dads-menu-list__item"><a href="{{ p.url | relative_url }}" class="dads-menu-list__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </details>
-    </li>
+  <details class="sb-menu__details" {% if page.parent == 'リサーチ' %}open{% endif %}>
+    <summary class="sb-menu__link">リサーチ</summary>
+    <div class="sb-menu__nested">
+      {% assign research = site.pages | where: "parent", "リサーチ" | sort: "nav_order" %}
+      {% for p in research %}
+      <a href="{{ p.url | relative_url }}" class="sb-menu__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a>
+      {% endfor %}
+    </div>
+  </details>
 
-    {% assign req = site.pages | where: "title", "要件・背景" | first %}
-    {% if req %}
-    <li class="dads-menu-list__item">
-      <a href="{{ req.url | relative_url }}" class="dads-menu-list__link {% if page.url == req.url %}is-current{% endif %}">要件・背景</a>
-    </li>
-    {% endif %}
-  </ul>
-</div>
+  <details class="sb-menu__details" {% if page.parent == 'レビュー記録' %}open{% endif %}>
+    <summary class="sb-menu__link">レビュー記録</summary>
+    <div class="sb-menu__nested">
+      {% assign reviews = site.pages | where: "parent", "レビュー記録" | sort: "nav_order" %}
+      {% for p in reviews %}
+      <a href="{{ p.url | relative_url }}" class="sb-menu__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a>
+      {% endfor %}
+    </div>
+  </details>
 
-<!-- 参考資料 -->
-<div class="dads-menu-section">
-  <div class="dads-menu-section__label">参考資料</div>
-  <ul class="dads-menu-list">
-    <li class="dads-menu-list__item dads-menu-list__item--has-children">
-      <details class="dads-menu-list__details" {% if page.parent == 'GitHub Copilot 設定' %}open{% endif %}>
-        <summary class="dads-menu-list__link">GitHub Copilot 設定</summary>
-        <ul class="dads-menu-list dads-menu-list--nested">
-          {% assign gh = site.pages | where: "parent", "GitHub Copilot 設定" | sort: "nav_order" %}
-          {% for p in gh %}
-          <li class="dads-menu-list__item"><a href="{{ p.url | relative_url }}" class="dads-menu-list__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </details>
-    </li>
+  {% assign req = site.pages | where: "title", "要件・背景" | first %}
+  {% if req %}
+  <a href="{{ req.url | relative_url }}" class="sb-menu__link {% if page.url == req.url %}is-current{% endif %}">要件・背景</a>
+  {% endif %}
 
-    <li class="dads-menu-list__item dads-menu-list__item--has-children">
-      <details class="dads-menu-list__details" {% if page.parent == 'Claude Code コマンド' %}open{% endif %}>
-        <summary class="dads-menu-list__link">Claude Code コマンド</summary>
-        <ul class="dads-menu-list dads-menu-list--nested">
-          {% assign claude = site.pages | where: "parent", "Claude Code コマンド" | sort: "nav_order" %}
-          {% for p in claude %}
-          <li class="dads-menu-list__item"><a href="{{ p.url | relative_url }}" class="dads-menu-list__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </details>
-    </li>
-  </ul>
+  {%- comment -%} 参考資料 {%- endcomment -%}
+  <div class="sb-menu__section">
+    <div class="sb-menu__section-label">参考資料</div>
+  </div>
+
+  <details class="sb-menu__details" {% if page.parent == 'GitHub Copilot 設定' %}open{% endif %}>
+    <summary class="sb-menu__link">GitHub Copilot 設定</summary>
+    <div class="sb-menu__nested">
+      {% assign gh = site.pages | where: "parent", "GitHub Copilot 設定" | sort: "nav_order" %}
+      {% for p in gh %}
+      <a href="{{ p.url | relative_url }}" class="sb-menu__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a>
+      {% endfor %}
+    </div>
+  </details>
+
+  <details class="sb-menu__details" {% if page.parent == 'Claude Code コマンド' %}open{% endif %}>
+    <summary class="sb-menu__link">Claude Code コマンド</summary>
+    <div class="sb-menu__nested">
+      {% assign claude = site.pages | where: "parent", "Claude Code コマンド" | sort: "nav_order" %}
+      {% for p in claude %}
+      <a href="{{ p.url | relative_url }}" class="sb-menu__link {% if page.url == p.url %}is-current{% endif %}">{{ p.title }}</a>
+      {% endfor %}
+    </div>
+  </details>
 </div>
