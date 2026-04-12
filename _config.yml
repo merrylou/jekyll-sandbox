@@ -3,25 +3,25 @@ description: SIer組織向け GitHub Copilot 活用ガイド — 実装工程・
 url: "https://merrylou.github.io"
 baseurl: "/jekyll-sandbox"
 
-remote_theme: just-the-docs/just-the-docs@v0.10.1
+# remote_theme: just-the-docs/just-the-docs@v0.10.1
 
 plugins:
-  - jekyll-remote-theme
+  # - jekyll-remote-theme
   - jekyll-seo-tag
 
-# just-the-docs settings
-color_scheme: light
-search_enabled: true
-nav_sort: case_insensitive
-heading_anchors: true
+# just-the-docs settings (disabled — using custom layout)
+# color_scheme: light
+# search_enabled: true
+# nav_sort: case_insensitive
+# heading_anchors: true
 lang: ja
 
-# Mermaid
-mermaid:
-  version: "10.9.0"
+# Mermaid (disabled — no JS dependencies)
+# mermaid:
+#   version: "10.9.0"
 
-# Footer
-footer_content: "AI駆動開発プレイブック &mdash; Jekyll + GitHub Pages サンドボックス"
+# Footer (disabled — custom layout)
+# footer_content: "AI駆動開発プレイブック &mdash; Jekyll + GitHub Pages サンドボックス"
 
 # Default front matter
 defaults:
