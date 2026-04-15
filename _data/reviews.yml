@@ -1,0 +1,21 @@
+- date: "2026-04-02 #01"
+  subtitle: "初版ドラフトの全体レビュー"
+  scores:
+    - role: PM
+      score: "4/5"
+    - role: リーダー
+      score: "4/5"
+    - role: 開発者
+      score: "4/5"
+  description: "「読まれる設計」「段階的導入パス（UC04から）」「人間が確認すべきこと + よくある落とし穴の二段構え」が全ロールから高評価"
+
+- date: "2026-04-03 #01"
+  subtitle: "Copilotネイティブ設定導入後のレビュー"
+  scores:
+    - role: PM
+      score: "4/5"
+    - role: リーダー
+      score: "4/5"
+    - role: 開発者
+      score: "4/5"
+  description: "全ロール維持（質的向上）。Copilotネイティブ設定への移行が完了し、実用性がさらに向上"
